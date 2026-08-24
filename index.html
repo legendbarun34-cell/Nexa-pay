@@ -1040,10 +1040,20 @@ JSON.parse(
 localStorage.getItem("nexaAccount")
 );
 
-let wallet=
-JSON.parse(
-localStorage.getItem("nexaWalletV6")
-)
+let wallet =
+JSON.parse(localStorage.getItem("nexaWalletV6")) || {};
+
+wallet.USD = Number(wallet.USD) || 0;
+wallet.GBP = Number(wallet.GBP) || 0;
+wallet.EUR = Number(wallet.EUR) || 0;
+wallet.NGN = Number(wallet.NGN) || 0;
+wallet.AED = Number(wallet.AED) || 0;
+wallet.CAD = Number(wallet.CAD) || 0;
+wallet.BTC = Number(wallet.BTC) || 0;
+
+wallet.transactions = Array.isArray(wallet.transactions)
+  ? wallet.transactions
+  : [];
 ||{
 
 USD:0,
