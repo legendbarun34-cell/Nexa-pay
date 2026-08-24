@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexaPay</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #080808;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: auto;
+      min-height: 100vh;
+      padding: 22px 18px 100px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: bold;
+      color: #d4af37;
+    }
+
+    .profile {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #d4af37;
+      color: #080808;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .welcome {
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .cashtag {
+      color: #d4af37;
+      margin-bottom: 20px;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #171717, #252525);
+      border: 1px solid #3a3a3a;
+      border-radius: 22px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    }
+
+    .balance-label {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .balance {
+      font-size: 38px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .currency {
+      color: #d4af37;
+      font-size: 14px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #d4af37;
+      color: #080808;
+    }
+
+    .secondary {
+      background: #1c1c1c;
+      color: white;
+      border: 1px solid #333;
+    }
+
+    .section-title {
+      font-size: 19px;
+      margin-bottom: 14px;
+    }
+
+    .wallet {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #151515;
+      padding: 17px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #252525;
+    }
+
+    .currency-name {
+      font-weight: bold;
+    }
+
+    .currency-code {
+      color: #888;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .amount {
+      font-weight: bold;
+    }
+
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 480px;
+      margin: auto;
+      background: #101010;
+      border-top: 1px solid #292929;
+      display: flex;
+      justify-content: space-around;
+      padding: 14px 5px;
+    }
+
+    .nav-item {
+      color: #777;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .nav-item.active {
+      color: #d4af37;
+    }
+
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div class="top">
+      <div class="logo">NexaPay</div>
+      <div class="profile">N</div>
+    </div>
+
+    <div class="welcome">Welcome back</div>
+    <h1>Your money, worldwide.</h1>
+
+    <div class="cashtag">$yourcashtag</div>
+
+    <div class="balance-card">
+      <div class="balance-label">Total balance</div>
+      <div class="balance">$0.00</div>
+      <div class="currency">USD</div>
+    </div>
+
+    <div class="actions">
+      <button class="primary">Send Money</button>
+      <button class="secondary">Receive</button>
+    </div>
+
+    <div class="section-title">Your wallets</div>
+
+    <div class="wallet">
+      <div>
+        <div class="currency-name">🇺🇸 US Dollar</div>
+        <div class="currency-code">USD</div>
+      </div>
+      <div class="amount">$0.00</div>
+    </div>
+
+    <div class="wallet">
+      <div>
+        <div class="currency-name">🇬🇧 British Pound</div>
+        <div class="currency-code">GBP</div>
+      </div>
+      <div class="amount">£0.00</div>
+    </div>
+
+    <div class="wallet">
+      <div>
+        <div class="currency-name">🇪🇺 Euro</div>
+        <div class="currency-code">EUR</div>
+      </div>
+      <div class="amount">€0.00</div>
+    </div>
+
+    <div class="wallet">
+      <div>
+        <div class="currency-name">🇳🇬 Nigerian Naira</div>
+        <div class="currency-code">NGN</div>
+      </div>
+      <div class="amount">₦0.00</div>
+    </div>
+
+  </div>
+
+  <div class="bottom">
+    <div class="nav-item active">
+      <div class="nav-icon">⌂</div>
+      Home
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-icon">⇄</div>
+      Activity
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-icon">＋</div>
+      Add Money
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-icon">●</div>
+      Profile
+    </div>
+  </div>
+
+</body>
+  </html>
