@@ -389,15 +389,14 @@ padding:16px;
 margin:15px 0
 }
 
-.selected-user strong{
-display:block;
-margin-bottom:5px
-}
-
 .success{
 color:#4ade80;
 font-size:13px;
 margin-top:10px
+}
+
+.crypto{
+color:#f7931a
 }
 </style>
 </head>
@@ -408,11 +407,9 @@ margin-top:10px
 
 <!-- SIGN UP -->
 
-<div id="signup" class="screen">
+<div id="signup" class="screen active">
 
-<div class="logo">
-NexaPay
-</div>
+<div class="logo">NexaPay</div>
 
 <h1>Create your account</h1>
 
@@ -470,7 +467,7 @@ Do not use a real password or sensitive information.
 </div>
 
 <div
-class="link"
+style="color:#d4af37;text-align:center;margin-top:18px;font-size:14px;cursor:pointer"
 onclick="showScreen('login')">
 
 Already have an account? Log in
@@ -484,9 +481,7 @@ Already have an account? Log in
 
 <div id="login" class="screen">
 
-<div class="logo">
-NexaPay
-</div>
+<div class="logo">NexaPay</div>
 
 <h1>Welcome back</h1>
 
@@ -523,7 +518,7 @@ Log In
 </div>
 
 <div
-class="link"
+style="color:#d4af37;text-align:center;margin-top:18px;font-size:14px;cursor:pointer"
 onclick="showScreen('signup')">
 
 Create a new account
@@ -617,7 +612,7 @@ Your wallets
 
 <button
 class="secondary"
-style="margin-top:10px"
+style="width:100%;margin-top:10px"
 onclick="showScreen('convert')">
 
 ⇄ Convert Currency
@@ -662,7 +657,7 @@ oninput="searchUsers()"
 id="sendAmount"
 type="number"
 min="0"
-step="0.01"
+step="0.00000001"
 placeholder="0.00"
 >
 
@@ -672,6 +667,7 @@ placeholder="0.00"
 
 <button
 class="primary"
+style="width:100%"
 onclick="sendMoney()">
 
 Send Money
@@ -725,6 +721,7 @@ Share your $Cashtag with anyone who wants to send you money.
 
 <button
 class="primary"
+style="width:100%"
 onclick="copyTag()">
 
 Copy $Cashtag
@@ -761,7 +758,7 @@ onclick="showScreen('home')">
 id="convertAmount"
 type="number"
 min="0"
-step="0.01"
+step="0.00000001"
 placeholder="0.00"
 >
 
@@ -771,6 +768,7 @@ placeholder="0.00"
 
 <button
 class="primary"
+style="width:100%"
 onclick="convertCurrency()">
 
 Convert
@@ -811,7 +809,7 @@ Demo exchange rates only. They are not live rates.
 id="addAmount"
 type="number"
 min="0"
-step="0.01"
+step="0.00000001"
 placeholder="0.00"
 >
 
@@ -821,6 +819,7 @@ placeholder="0.00"
 
 <button
 class="primary"
+style="width:100%"
 onclick="addDemoMoney()">
 
 Add Demo Money
@@ -861,6 +860,7 @@ class="cashtag"
 id="profileTag">
 
 $Abdulrahman
+
 </div>
 
 <div class="setting">
@@ -880,13 +880,14 @@ $Abdulrahman
 
 <div class="setting">
 <span>Supported currencies</span>
-<span>6</span>
+<span>7</span>
 </div>
 
 <br>
 
 <button
 class="secondary"
+style="width:100%"
 onclick="logout()">
 
 Log Out
@@ -1040,32 +1041,32 @@ JSON.parse(
 localStorage.getItem("nexaAccount")
 );
 
-let wallet =
-JSON.parse(localStorage.getItem("nexaWalletV6")) || {};
 
-wallet.USD = Number(wallet.USD) || 0;
-wallet.GBP = Number(wallet.GBP) || 0;
-wallet.EUR = Number(wallet.EUR) || 0;
-wallet.NGN = Number(wallet.NGN) || 0;
-wallet.AED = Number(wallet.AED) || 0;
-wallet.CAD = Number(wallet.CAD) || 0;
-wallet.BTC = Number(wallet.BTC) || 0;
+/* ==========================
+   WALLET
+   BTC NaN PROTECTION
+========================== */
 
-wallet.transactions = Array.isArray(wallet.transactions)
-  ? wallet.transactions
-  : [];
-||{
+let wallet=
+JSON.parse(
+localStorage.getItem("nexaWalletV6")
+)
+||{};
 
-USD:0,
-GBP:0,
-EUR:0,
-NGN:0,
-AED:0,
-CAD:0,
 
-transactions:[]
+wallet.USD=Number(wallet.USD)||0;
+wallet.GBP=Number(wallet.GBP)||0;
+wallet.EUR=Number(wallet.EUR)||0;
+wallet.NGN=Number(wallet.NGN)||0;
+wallet.AED=Number(wallet.AED)||0;
+wallet.CAD=Number(wallet.CAD)||0;
+wallet.BTC=Number(wallet.BTC)||0;
 
-};
+wallet.transactions=
+Array.isArray(wallet.transactions)
+?wallet.transactions
+:[];
+
 
 let selectedRecipient=null;
 
@@ -1083,6 +1084,7 @@ JSON.stringify(account)
 
 }
 
+
 function saveWallet(){
 
 localStorage.setItem(
@@ -1094,7 +1096,7 @@ JSON.stringify(wallet)
 
 
 /* ==========================
-   SCREEN
+   SCREEN NAVIGATION
 ========================== */
 
 function showScreen(screen,nav){
@@ -1144,7 +1146,7 @@ window.scrollTo(0,0);
 
 
 /* ==========================
-   ACCOUNT CREATION
+   CREATE ACCOUNT
 ========================== */
 
 function createAccount(){
@@ -1170,7 +1172,7 @@ document.getElementById(
 ).value;
 
 
-if(!name || !email || !tag || !password){
+if(!name||!email||!tag||!password){
 
 alert(
 "Please complete all fields."
@@ -1219,6 +1221,7 @@ password:password
 
 };
 
+
 saveAccount();
 
 loadProfile();
@@ -1263,7 +1266,7 @@ document.getElementById(
 
 
 if(
-email!==account.email ||
+email!==account.email||
 password!==account.password
 ){
 
@@ -1289,42 +1292,49 @@ showScreen("home");
 
 function loadProfile(){
 
-if(!account) return;
+if(!account)return;
 
 const initial=
 account.name
 .charAt(0)
 .toUpperCase();
 
+
 document.getElementById(
 "homeName"
 ).textContent=
 account.name;
+
 
 document.getElementById(
 "homeTag"
 ).textContent=
 account.cashtag;
 
+
 document.getElementById(
 "receiveTag"
 ).textContent=
 account.cashtag;
+
 
 document.getElementById(
 "profileName"
 ).textContent=
 account.name;
 
+
 document.getElementById(
 "profileTag"
 ).textContent=
 account.cashtag;
 
+
 document.getElementById(
 "profileInitial"
 ).textContent=
 initial;
+
 
 document.getElementById(
 "profileBig"
@@ -1347,12 +1357,15 @@ document.getElementById(
 .trim()
 .toLowerCase();
 
+
 const results=
 document.getElementById(
 "searchResults"
 );
 
+
 selectedRecipient=null;
+
 
 document.getElementById(
 "selectedRecipient"
@@ -1382,15 +1395,15 @@ user.name
 });
 
 
-if(account &&
+if(account&&
 account.cashtag
 .toLowerCase()
-.includes(input)){
+.includes(input)
+){
 
 users.unshift({
 
 name:account.name,
-
 cashtag:account.cashtag
 
 });
@@ -1399,6 +1412,7 @@ cashtag:account.cashtag
 
 
 const uniqueUsers=[];
+
 
 users.forEach(function(user){
 
@@ -1431,7 +1445,8 @@ return;
 
 
 results.innerHTML=
-uniqueUsers.map(function(user){
+uniqueUsers
+.map(function(user){
 
 return`
 
@@ -1474,7 +1489,8 @@ Select
 
 `;
 
-}).join("");
+})
+.join("");
 
 }
 
@@ -1486,7 +1502,7 @@ Select
 function selectRecipient(user){
 
 if(
-account &&
+account&&
 user.cashtag.toLowerCase()===
 account.cashtag.toLowerCase()
 ){
@@ -1501,6 +1517,7 @@ return;
 
 
 selectedRecipient=user;
+
 
 document.getElementById(
 "searchResults"
@@ -1550,11 +1567,12 @@ return;
 
 
 const amount=
-parseFloat(
+Number(
 document.getElementById(
 "sendAmount"
 ).value
 );
+
 
 const currency=
 document.getElementById(
@@ -1562,7 +1580,7 @@ document.getElementById(
 ).value;
 
 
-if(!amount || amount<=0){
+if(!Number.isFinite(amount)||amount<=0){
 
 alert(
 "Enter a valid amount."
@@ -1586,7 +1604,9 @@ return;
 }
 
 
-wallet[currency]-=amount;
+wallet[currency]=
+Number(wallet[currency])-
+amount;
 
 
 wallet.transactions.unshift({
@@ -1614,25 +1634,32 @@ document.getElementById(
 "recipientSearch"
 ).value="";
 
+
 document.getElementById(
 "sendAmount"
 ).value="";
+
 
 document.getElementById(
 "searchResults"
 ).innerHTML="";
 
+
 document.getElementById(
 "selectedRecipient"
 ).innerHTML="";
 
+
 selectedRecipient=null;
 
+
 updateWallet();
+
 
 alert(
 "Demo payment sent successfully."
 );
+
 
 showScreen("activity");
 
@@ -1654,6 +1681,7 @@ const ids=[
 
 ];
 
+
 ids.forEach(function(id){
 
 const select=
@@ -1661,16 +1689,15 @@ document.getElementById(id);
 
 select.innerHTML="";
 
+
 Object.keys(currencies)
 .forEach(function(code){
 
 select.innerHTML+=`
 
 <option value="${code}">
-
 ${code} -
 ${currencies[code].name}
-
 </option>
 
 `;
@@ -1688,17 +1715,24 @@ document.getElementById(
 
 
 /* ==========================
-   FORMAT MONEY
+   MONEY FORMATTING
 ========================== */
 
 function formatMoney(currency,amount){
 
+const value=
+Number(amount)||0;
+
+
 return currencies[currency].symbol+
-Number(amount).toLocaleString(
+value.toLocaleString(
 undefined,
 {
-minimumFractionDigits:2,
-maximumFractionDigits:2
+minimumFractionDigits:
+currency==="BTC"?8:2,
+
+maximumFractionDigits:
+currency==="BTC"?8:2
 }
 );
 
@@ -1722,16 +1756,31 @@ saveWallet();
 }
 
 
+/* ==========================
+   TOTAL USD VALUE
+========================== */
+
 function updateTotal(){
 
 let totalUSD=0;
 
+
 Object.keys(currencies)
 .forEach(function(currency){
 
-totalUSD +=
-(Number(wallet[currency]) || 0) /
-currencies[currency].rate;
+const amount=
+Number(wallet[currency])||0;
+
+const rate=
+Number(currencies[currency].rate)||0;
+
+
+if(rate>0){
+
+totalUSD+=
+amount/rate;
+
+}
 
 });
 
@@ -1751,6 +1800,10 @@ maximumFractionDigits:2
 }
 
 
+/* ==========================
+   RENDER WALLETS
+========================== */
+
 function renderWallets(){
 
 const container=
@@ -1758,15 +1811,18 @@ document.getElementById(
 "walletList"
 );
 
-if(!container) return;
+if(!container)return;
+
 
 container.innerHTML="";
+
 
 Object.keys(currencies)
 .forEach(function(currency){
 
 const info=
 currencies[currency];
+
 
 container.innerHTML+=`
 
@@ -1775,8 +1831,10 @@ container.innerHTML+=`
 <div>
 
 <div class="currency-name">
+
 ${info.symbol}
 ${info.name}
+
 </div>
 
 <div class="currency-code">
@@ -1786,10 +1844,12 @@ ${currency}
 </div>
 
 <div class="amount">
+
 ${formatMoney(
 currency,
 wallet[currency]
 )}
+
 </div>
 
 </div>
@@ -1808,11 +1868,12 @@ wallet[currency]
 function addDemoMoney(){
 
 const amount=
-parseFloat(
+Number(
 document.getElementById(
 "addAmount"
 ).value
 );
+
 
 const currency=
 document.getElementById(
@@ -1820,7 +1881,7 @@ document.getElementById(
 ).value;
 
 
-if(!amount || amount<=0){
+if(!Number.isFinite(amount)||amount<=0){
 
 alert(
 "Enter a valid amount."
@@ -1831,7 +1892,9 @@ return;
 }
 
 
-wallet[currency]+=amount;
+wallet[currency]=
+(Number(wallet[currency])||0)+
+amount;
 
 
 wallet.transactions.unshift({
@@ -1858,12 +1921,15 @@ document.getElementById(
 "addAmount"
 ).value="";
 
+
 updateWallet();
+
 
 alert(
 formatMoney(currency,amount)+
 " demo money added."
 );
+
 
 showScreen("activity");
 
@@ -1871,7 +1937,7 @@ showScreen("activity");
 
 
 /* ==========================
-   CONVERT
+   CONVERT CURRENCY
 ========================== */
 
 function convertCurrency(){
@@ -1881,20 +1947,22 @@ document.getElementById(
 "fromCurrency"
 ).value;
 
+
 const to=
 document.getElementById(
 "toCurrency"
 ).value;
 
+
 const amount=
-parseFloat(
+Number(
 document.getElementById(
 "convertAmount"
 ).value
 );
 
 
-if(!amount || amount<=0){
+if(!Number.isFinite(amount)||amount<=0){
 
 alert(
 "Enter a valid amount."
@@ -1916,7 +1984,10 @@ return;
 }
 
 
-if(amount>wallet[from]){
+if(
+amount>
+(Number(wallet[from])||0)
+){
 
 alert(
 "Insufficient "+
@@ -1929,18 +2000,30 @@ return;
 }
 
 
+const fromRate=
+Number(currencies[from].rate);
+
+
+const toRate=
+Number(currencies[to].rate);
+
+
 const usdValue=
-amount/
-currencies[from].rate;
+amount/fromRate;
+
 
 const converted=
-usdValue*
-currencies[to].rate;
+usdValue*toRate;
 
 
-wallet[from]-=amount;
+wallet[from]=
+(Number(wallet[from])||0)-
+amount;
 
-wallet[to]+=converted;
+
+wallet[to]=
+(Number(wallet[to])||0)+
+converted;
 
 
 wallet.transactions.unshift({
@@ -1950,11 +2033,15 @@ type:"convert",
 title:"Currency conversion",
 
 description:
-amount.toFixed(2)+
+amount.toFixed(
+from==="BTC"?8:2
+)+
 " "+
 from+
 " → "+
-converted.toFixed(2)+
+converted.toFixed(
+to==="BTC"?8:2
+)+
 " "+
 to,
 
@@ -1971,13 +2058,16 @@ document.getElementById(
 "convertAmount"
 ).value="";
 
+
 updateWallet();
+
 
 alert(
 formatMoney(from,amount)+
 " converted to "+
 formatMoney(to,converted)
 );
+
 
 showScreen("activity");
 
@@ -1995,7 +2085,7 @@ document.getElementById(
 "transactions"
 );
 
-if(!container) return;
+if(!container)return;
 
 
 if(wallet.transactions.length===0){
@@ -2006,11 +2096,9 @@ container.innerHTML=`
 
 No transactions yet.
 
-<br>
+<br><br>
 
-<small>
 Your wallet activity will appear here.
-</small>
 
 </div>
 
@@ -2035,6 +2123,7 @@ sign="+";
 className="positive";
 
 }
+
 
 else if(tx.type==="out"){
 
@@ -2090,7 +2179,8 @@ tx.amount
 
 function copyTag(){
 
-if(!account) return;
+if(!account)return;
+
 
 if(navigator.clipboard){
 
@@ -2099,6 +2189,7 @@ account.cashtag
 );
 
 }
+
 
 alert(
 account.cashtag+
@@ -2116,9 +2207,11 @@ function logout(){
 
 showScreen("login");
 
+
 document.getElementById(
 "loginEmail"
 ).value="";
+
 
 document.getElementById(
 "loginPassword"
@@ -2128,10 +2221,11 @@ document.getElementById(
 
 
 /* ==========================
-   START
+   START APP
 ========================== */
 
 populateCurrencySelects();
+
 
 if(account){
 
@@ -2140,11 +2234,13 @@ loadProfile();
 showScreen("home");
 
 }
+
 else{
 
 showScreen("signup");
 
 }
+
 
 updateWallet();
 
