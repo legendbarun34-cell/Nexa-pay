@@ -6,37 +6,114 @@
 <title>NexaPay</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 
 body{
   background:#080808;
   color:#fff;
-  min-height:100vh
+  min-height:100vh;
 }
 
 .app{
   max-width:480px;
   margin:auto;
   min-height:100vh;
-  padding:20px 18px 95px
+  padding:20px 18px 95px;
+}
+
+.logo{
+  font-size:29px;
+  font-weight:bold;
+  color:#d4af37;
+  margin-bottom:30px;
+}
+
+.screen{display:none}
+.screen.active{display:block}
+
+h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:#999;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:22px;
+}
+
+.form-card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:20px;
+}
+
+label{
+  display:block;
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+input,select{
+  width:100%;
+  padding:15px;
+  background:#0d0d0d;
+  border:1px solid #333;
+  border-radius:12px;
+  color:#fff;
+  margin-bottom:15px;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#d4af37;
+}
+
+button{
+  width:100%;
+  border:none;
+  border-radius:14px;
+  padding:15px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.primary{
+  background:#d4af37;
+  color:#080808;
+}
+
+.secondary{
+  background:#1b1b1b;
+  color:#fff;
+  border:1px solid #333;
+}
+
+.link{
+  color:#d4af37;
+  text-align:center;
+  margin-top:18px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.logo-small{
+  color:#d4af37;
+  font-weight:bold;
+  font-size:25px;
+  margin-bottom:30px;
 }
 
 .top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:28px
-}
-
-.logo{
-  font-size:27px;
-  font-weight:bold;
-  color:#d4af37
+  margin-bottom:28px;
 }
 
 .profile{
@@ -48,28 +125,20 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:bold
+  font-weight:bold;
 }
-
-.screen{display:none}
-.screen.active{display:block}
 
 .welcome{
   color:#999;
   font-size:14px;
-  margin-bottom:6px
-}
-
-h1{
-  font-size:28px;
-  margin-bottom:18px
+  margin-bottom:6px;
 }
 
 .cashtag{
   color:#d4af37;
   font-size:15px;
   font-weight:bold;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .balance-card{
@@ -77,55 +146,35 @@ h1{
   border:1px solid #383838;
   border-radius:22px;
   padding:25px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .balance-label{
   color:#aaa;
-  font-size:14px
+  font-size:14px;
 }
 
 .balance{
   font-size:38px;
   font-weight:bold;
-  margin:8px 0
+  margin:8px 0;
 }
 
 .currency{
   color:#d4af37;
-  font-size:14px
+  font-size:14px;
 }
 
 .actions{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
-  margin-bottom:28px
-}
-
-button{
-  border:none;
-  border-radius:14px;
-  padding:15px;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer
-}
-
-.primary{
-  background:#d4af37;
-  color:#080808
-}
-
-.secondary{
-  background:#1b1b1b;
-  color:white;
-  border:1px solid #333
+  margin-bottom:28px;
 }
 
 .section-title{
   font-size:19px;
-  margin-bottom:14px
+  margin-bottom:14px;
 }
 
 .wallet{
@@ -136,7 +185,7 @@ button{
   padding:17px;
   border-radius:15px;
   margin-bottom:10px;
-  border:1px solid #252525
+  border:1px solid #252525;
 }
 
 .currency-name{font-weight:bold}
@@ -144,36 +193,10 @@ button{
 .currency-code{
   color:#888;
   font-size:12px;
-  margin-top:4px
+  margin-top:4px;
 }
 
 .amount{font-weight:bold}
-
-.form-card{
-  background:#151515;
-  border:1px solid #292929;
-  border-radius:18px;
-  padding:20px;
-  margin-top:15px
-}
-
-label{
-  display:block;
-  color:#aaa;
-  font-size:13px;
-  margin-bottom:7px
-}
-
-input,select{
-  width:100%;
-  padding:15px;
-  background:#0d0d0d;
-  border:1px solid #333;
-  border-radius:12px;
-  color:white;
-  margin-bottom:15px;
-  font-size:15px
-}
 
 .receive-box{
   text-align:center;
@@ -181,14 +204,14 @@ input,select{
   border:1px solid #333;
   border-radius:20px;
   padding:28px 20px;
-  margin-top:15px
+  margin-top:15px;
 }
 
 .receive-tag{
   font-size:28px;
   font-weight:bold;
   color:#d4af37;
-  margin:15px 0
+  margin:15px 0;
 }
 
 .qr{
@@ -201,7 +224,7 @@ input,select{
   align-items:center;
   justify-content:center;
   font-size:55px;
-  border-radius:12px
+  border-radius:12px;
 }
 
 .transaction{
@@ -212,13 +235,13 @@ input,select{
   border:1px solid #252525;
   border-radius:15px;
   padding:16px;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .transaction small{
   color:#888;
   display:block;
-  margin-top:5px
+  margin-top:5px;
 }
 
 .positive{color:#4ade80}
@@ -228,7 +251,7 @@ input,select{
   background:#151515;
   border-radius:18px;
   padding:22px;
-  border:1px solid #292929
+  border:1px solid #292929;
 }
 
 .profile-big{
@@ -242,14 +265,14 @@ input,select{
   justify-content:center;
   font-size:28px;
   font-weight:bold;
-  margin-bottom:15px
+  margin-bottom:15px;
 }
 
 .setting{
   display:flex;
   justify-content:space-between;
   padding:17px 0;
-  border-bottom:1px solid #292929
+  border-bottom:1px solid #292929;
 }
 
 .setting:last-child{border-bottom:none}
@@ -266,7 +289,7 @@ input,select{
   display:flex;
   justify-content:space-around;
   padding:12px 4px;
-  z-index:10
+  z-index:10;
 }
 
 .nav-item{
@@ -274,21 +297,32 @@ input,select{
   text-align:center;
   font-size:11px;
   cursor:pointer;
-  min-width:55px
+  min-width:55px;
 }
 
 .nav-item.active{color:#d4af37}
 
 .nav-icon{
   font-size:20px;
-  margin-bottom:4px
+  margin-bottom:4px;
 }
 
 .back{
   color:#d4af37;
   margin-bottom:20px;
   cursor:pointer;
-  font-weight:bold
+  font-weight:bold;
+}
+
+.notice{
+  background:#171717;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:12px;
+  color:#999;
+  font-size:12px;
+  line-height:1.5;
+  margin-top:15px;
 }
 
 .empty{
@@ -296,14 +330,7 @@ input,select{
   text-align:center;
   padding:30px 10px;
   background:#151515;
-  border-radius:15px
-}
-
-.rate-note{
-  color:#777;
-  font-size:11px;
-  margin-top:12px;
-  text-align:center
+  border-radius:15px;
 }
 </style>
 </head>
@@ -312,26 +339,179 @@ input,select{
 
 <div class="app">
 
-<div class="top">
-  <div class="logo">NexaPay</div>
-  <div class="profile">A</div>
+<!-- SIGN UP -->
+
+<div id="signup" class="screen active">
+
+<div class="logo">NexaPay</div>
+
+<h1>Create your account</h1>
+
+<div class="subtitle">
+Create your NexaPay prototype account and choose your unique $Cashtag.
 </div>
+
+<div class="form-card">
+
+<label>Your name</label>
+
+<input
+id="signupName"
+type="text"
+placeholder="Your name"
+>
+
+<label>Email</label>
+
+<input
+id="signupEmail"
+type="email"
+placeholder="example@email.com"
+>
+
+<label>Choose your $Cashtag</label>
+
+<input
+id="signupTag"
+type="text"
+placeholder="$YourName"
+>
+
+<label>Demo password</label>
+
+<input
+id="signupPassword"
+type="password"
+placeholder="Create a demo password"
+>
+
+<button
+class="primary"
+onclick="createAccount()">
+
+Create NexaPay Account
+
+</button>
+
+<div class="notice">
+
+Prototype mode: this account is stored only in this browser.
+Do not use a real password or sensitive information.
+
+</div>
+
+</div>
+
+<div
+class="link"
+onclick="showScreen('login')">
+
+Already have an account? Log in
+
+</div>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="login" class="screen">
+
+<div class="logo">NexaPay</div>
+
+<h1>Welcome back</h1>
+
+<div class="subtitle">
+Log in to your NexaPay prototype account.
+</div>
+
+<div class="form-card">
+
+<label>Email</label>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Your email"
+>
+
+<label>Password</label>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Your demo password"
+>
+
+<button
+class="primary"
+onclick="login()">
+
+Log In
+
+</button>
+
+</div>
+
+<div
+class="link"
+onclick="showScreen('signup')">
+
+Create a new account
+
+</div>
+
+</div>
+
 
 <!-- HOME -->
 
-<div id="home" class="screen active">
+<div id="home" class="screen">
 
-<div class="welcome">Welcome back</div>
-<h1>Your money, worldwide.</h1>
+<div class="top">
 
-<div class="cashtag">$Abdulrahman</div>
+<div class="logo-small">
+NexaPay
+</div>
+
+<div
+class="profile"
+id="profileInitial">
+
+A
+
+</div>
+
+</div>
+
+<div class="welcome">
+Welcome back
+</div>
+
+<h1 id="homeName">
+Abdulrahman
+</h1>
+
+<div
+class="cashtag"
+id="homeTag">
+
+$Abdulrahman
+
+</div>
 
 <div class="balance-card">
 
-<div class="balance-label">Total USD value</div>
+<div class="balance-label">
+Total USD value
+</div>
 
-<div class="balance" id="totalBalance">
+<div
+class="balance"
+id="totalBalance">
+
 $0.00
+
 </div>
 
 <div class="currency">
@@ -342,12 +522,20 @@ Multi-currency wallet
 
 <div class="actions">
 
-<button class="primary" onclick="showScreen('send')">
+<button
+class="primary"
+onclick="showScreen('send')">
+
 Send Money
+
 </button>
 
-<button class="secondary" onclick="showScreen('receive')">
+<button
+class="secondary"
+onclick="showScreen('receive')">
+
 Receive
+
 </button>
 
 </div>
@@ -358,8 +546,9 @@ Your wallets
 
 <div id="walletList"></div>
 
-<button class="secondary"
-style="width:100%;margin-top:10px"
+<button
+class="secondary"
+style="margin-top:10px"
 onclick="showScreen('convert')">
 
 ⇄ Convert Currency
@@ -373,8 +562,12 @@ onclick="showScreen('convert')">
 
 <div id="send" class="screen">
 
-<div class="back" onclick="showScreen('home')">
+<div
+class="back"
+onclick="showScreen('home')">
+
 ← Back
+
 </div>
 
 <h1>Send Money</h1>
@@ -405,7 +598,6 @@ placeholder="0.00"
 
 <button
 class="primary"
-style="width:100%"
 onclick="sendMoney()">
 
 Send Money
@@ -421,8 +613,12 @@ Send Money
 
 <div id="receive" class="screen">
 
-<div class="back" onclick="showScreen('home')">
+<div
+class="back"
+onclick="showScreen('home')">
+
 ← Back
+
 </div>
 
 <h1>Receive Money</h1>
@@ -431,8 +627,12 @@ Send Money
 
 <div>Your NexaPay payment identity</div>
 
-<div class="receive-tag">
+<div
+class="receive-tag"
+id="receiveTag">
+
 $Abdulrahman
+
 </div>
 
 <div class="qr">
@@ -447,7 +647,6 @@ Share your $Cashtag with anyone who wants to send you money.
 
 <button
 class="primary"
-style="width:100%"
 onclick="copyTag()">
 
 Copy $Cashtag
@@ -463,8 +662,12 @@ Copy $Cashtag
 
 <div id="convert" class="screen">
 
-<div class="back" onclick="showScreen('home')">
+<div
+class="back"
+onclick="showScreen('home')">
+
 ← Back
+
 </div>
 
 <h1>Convert Currency</h1>
@@ -491,15 +694,14 @@ placeholder="0.00"
 
 <button
 class="primary"
-style="width:100%"
 onclick="convertCurrency()">
 
 Convert
 
 </button>
 
-<div class="rate-note">
-Demo exchange rates for prototype testing only.
+<div class="notice">
+Demo exchange rates only. They are not live rates.
 </div>
 
 </div>
@@ -542,18 +744,15 @@ placeholder="0.00"
 
 <button
 class="primary"
-style="width:100%"
 onclick="addDemoMoney()">
 
 Add Demo Money
 
 </button>
 
-<p style="color:#777;font-size:12px;margin-top:15px;text-align:center">
-
+<div class="notice">
 Demo mode — no real money is being moved.
-
-</p>
+</div>
 
 </div>
 
@@ -568,14 +767,24 @@ Demo mode — no real money is being moved.
 
 <div class="profile-card">
 
-<div class="profile-big">
+<div
+class="profile-big"
+id="profileBig">
+
 A
+
 </div>
 
-<h2>Abdulrahman</h2>
+<h2 id="profileName">
+Abdulrahman
+</h2>
 
-<div class="cashtag">
+<div
+class="cashtag"
+id="profileTag">
+
 $Abdulrahman
+
 </div>
 
 <div class="setting">
@@ -595,10 +804,18 @@ $Abdulrahman
 
 <div class="setting">
 <span>Supported currencies</span>
-<span>6 currencies</span>
+<span>6</span>
 </div>
 
-</div>
+<br>
+
+<button
+class="secondary"
+onclick="logout()">
+
+Log Out
+
+</button>
 
 </div>
 
@@ -607,7 +824,10 @@ $Abdulrahman
 
 <!-- NAVIGATION -->
 
-<div class="bottom">
+<div
+id="navigation"
+class="bottom"
+style="display:none">
 
 <div
 class="nav-item active"
@@ -650,16 +870,11 @@ Profile
 
 <script>
 
-/*
-NexaPay v4
-Demo multi-currency wallet.
+/* ---------------------------
+   CURRENCY DATA
+---------------------------- */
 
-IMPORTANT:
-These rates are demonstration values only.
-They are NOT live exchange rates.
-*/
-
-const currencies = {
+const currencies={
 
 USD:{
 name:"US Dollar",
@@ -700,9 +915,20 @@ rate:1.36
 };
 
 
-let wallet =
-JSON.parse(localStorage.getItem("nexaWalletV4"))
-|| {
+/* ---------------------------
+   ACCOUNT
+---------------------------- */
+
+let account=
+JSON.parse(
+localStorage.getItem("nexaAccount")
+);
+
+let wallet=
+JSON.parse(
+localStorage.getItem("nexaWalletV5")
+)
+||{
 
 USD:0,
 GBP:0,
@@ -710,25 +936,332 @@ EUR:0,
 NGN:0,
 AED:0,
 CAD:0,
-
 transactions:[]
 
 };
 
 
+/* ---------------------------
+   SAVE
+---------------------------- */
+
+function saveAccount(){
+
+localStorage.setItem(
+"nexaAccount",
+JSON.stringify(account)
+);
+
+}
+
 function saveWallet(){
 
 localStorage.setItem(
-"nexaWalletV4",
+"nexaWalletV5",
 JSON.stringify(wallet)
 );
 
 }
 
 
+/* ---------------------------
+   SCREEN NAVIGATION
+---------------------------- */
+
+function showScreen(screen,nav){
+
+document.querySelectorAll(".screen")
+.forEach(function(page){
+
+page.classList.remove("active");
+
+});
+
+document.getElementById(screen)
+.classList.add("active");
+
+
+if(account && screen!=="signup" && screen!=="login"){
+
+document.getElementById(
+"navigation"
+).style.display="flex";
+
+}else{
+
+document.getElementById(
+"navigation"
+).style.display="none";
+
+}
+
+
+document.querySelectorAll(".nav-item")
+.forEach(function(item){
+
+item.classList.remove("active");
+
+});
+
+if(nav){
+
+nav.classList.add("active");
+
+}
+
+window.scrollTo(0,0);
+
+}
+
+
+/* ---------------------------
+   CREATE ACCOUNT
+---------------------------- */
+
+function createAccount(){
+
+const name=
+document.getElementById(
+"signupName"
+).value.trim();
+
+const email=
+document.getElementById(
+"signupEmail"
+).value.trim();
+
+let tag=
+document.getElementById(
+"signupTag"
+).value.trim();
+
+const password=
+document.getElementById(
+"signupPassword"
+).value;
+
+
+if(!name || !email || !tag || !password){
+
+alert(
+"Please complete all fields."
+);
+
+return;
+
+}
+
+
+if(!tag.startsWith("$")){
+
+tag="$"+tag;
+
+}
+
+
+if(tag.length<3){
+
+alert(
+"Your $Cashtag is too short."
+);
+
+return;
+
+}
+
+
+if(tag.includes(" ")){
+
+alert(
+"$Cashtag cannot contain spaces."
+);
+
+return;
+
+}
+
+
+account={
+
+name:name,
+
+email:email,
+
+cashtag:tag,
+
+password:password
+
+};
+
+
+saveAccount();
+
+loadProfile();
+
+alert(
+"Your NexaPay demo account has been created."
+);
+
+showScreen("home");
+
+}
+
+
+/* ---------------------------
+   LOGIN
+---------------------------- */
+
+function login(){
+
+if(!account){
+
+alert(
+"No demo account exists yet."
+);
+
+showScreen("signup");
+
+return;
+
+}
+
+
+const email=
+document.getElementById(
+"loginEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"loginPassword"
+).value;
+
+
+if(
+email!==account.email ||
+password!==account.password
+){
+
+alert(
+"Incorrect demo login details."
+);
+
+return;
+
+}
+
+
+loadProfile();
+
+alert(
+"Welcome back to NexaPay."
+);
+
+showScreen("home");
+
+}
+
+
+/* ---------------------------
+   PROFILE
+---------------------------- */
+
+function loadProfile(){
+
+if(!account) return;
+
+const initial=
+account.name
+.charAt(0)
+.toUpperCase();
+
+document.getElementById(
+"homeName"
+).textContent=
+account.name;
+
+document.getElementById(
+"homeTag"
+).textContent=
+account.cashtag;
+
+document.getElementById(
+"receiveTag"
+).textContent=
+account.cashtag;
+
+document.getElementById(
+"profileName"
+).textContent=
+account.name;
+
+document.getElementById(
+"profileTag"
+).textContent=
+account.cashtag;
+
+document.getElementById(
+"profileInitial"
+).textContent=
+initial;
+
+document.getElementById(
+"profileBig"
+).textContent=
+initial;
+
+}
+
+
+/* ---------------------------
+   CURRENCY SELECTS
+---------------------------- */
+
+function populateCurrencySelects(){
+
+const ids=[
+"sendCurrency",
+"fromCurrency",
+"toCurrency",
+"addCurrency"
+];
+
+ids.forEach(function(id){
+
+const select=
+document.getElementById(id);
+
+select.innerHTML="";
+
+Object.keys(currencies)
+.forEach(function(code){
+
+select.innerHTML+=`
+
+<option value="${code}">
+${code} - ${currencies[code].name}
+</option>
+
+`;
+
+});
+
+});
+
+document.getElementById(
+"toCurrency"
+).value="NGN";
+
+}
+
+
+/* ---------------------------
+   MONEY FORMATTING
+---------------------------- */
+
 function formatMoney(currency,amount){
 
-return currencies[currency].symbol +
+return currencies[currency].symbol+
 Number(amount).toLocaleString(
 undefined,
 {
@@ -739,6 +1272,10 @@ maximumFractionDigits:2
 
 }
 
+
+/* ---------------------------
+   WALLET
+---------------------------- */
 
 function updateWallet(){
 
@@ -757,18 +1294,20 @@ function updateTotal(){
 
 let totalUSD=0;
 
-Object.keys(currencies).forEach(function(currency){
+Object.keys(currencies)
+.forEach(function(currency){
 
-totalUSD +=
-wallet[currency] /
+totalUSD+=
+wallet[currency]/
 currencies[currency].rate;
 
 });
 
 document.getElementById(
 "totalBalance"
-).textContent =
-"$" + totalUSD.toLocaleString(
+).textContent=
+"$"+
+totalUSD.toLocaleString(
 undefined,
 {
 minimumFractionDigits:2,
@@ -781,45 +1320,42 @@ maximumFractionDigits:2
 
 function renderWallets(){
 
-const container =
+const container=
 document.getElementById(
 "walletList"
 );
 
+if(!container) return;
+
 container.innerHTML="";
 
-Object.keys(currencies).forEach(function(currency){
+Object.keys(currencies)
+.forEach(function(currency){
 
-const info =
+const info=
 currencies[currency];
 
-container.innerHTML += `
+container.innerHTML+=`
 
 <div class="wallet">
 
 <div>
 
 <div class="currency-name">
-
 ${info.symbol} ${info.name}
-
 </div>
 
 <div class="currency-code">
-
 ${currency}
-
 </div>
 
 </div>
 
 <div class="amount">
-
 ${formatMoney(
 currency,
 wallet[currency]
 )}
-
 </div>
 
 </div>
@@ -831,97 +1367,38 @@ wallet[currency]
 }
 
 
-function populateCurrencySelects(){
-
-const selects=[
-
-document.getElementById("sendCurrency"),
-document.getElementById("fromCurrency"),
-document.getElementById("toCurrency"),
-document.getElementById("addCurrency")
-
-];
-
-selects.forEach(function(select){
-
-select.innerHTML="";
-
-Object.keys(currencies).forEach(function(currency){
-
-select.innerHTML += `
-
-<option value="${currency}">
-
-${currency} - ${currencies[currency].name}
-
-</option>
-
-`;
-
-});
-
-});
-
-document.getElementById("toCurrency").value="NGN";
-
-}
-
-
-function showScreen(screen,nav){
-
-document.querySelectorAll(".screen")
-.forEach(function(page){
-
-page.classList.remove("active");
-
-});
-
-document.getElementById(screen)
-.classList.add("active");
-
-document.querySelectorAll(".nav-item")
-.forEach(function(item){
-
-item.classList.remove("active");
-
-});
-
-if(nav){
-
-nav.classList.add("active");
-
-}
-
-window.scrollTo(0,0);
-
-renderTransactions();
-
-}
-
+/* ---------------------------
+   ADD DEMO MONEY
+---------------------------- */
 
 function addDemoMoney(){
 
-const amount =
+const amount=
 parseFloat(
 document.getElementById(
 "addAmount"
 ).value
 );
 
-const currency =
+const currency=
 document.getElementById(
 "addCurrency"
 ).value;
 
+
 if(!amount || amount<=0){
 
-alert("Enter a valid amount.");
+alert(
+"Enter a valid amount."
+);
 
 return;
 
 }
 
-wallet[currency] += amount;
+
+wallet[currency]+=amount;
+
 
 wallet.transactions.unshift({
 
@@ -940,6 +1417,7 @@ date:new Date().toLocaleString()
 
 });
 
+
 document.getElementById(
 "addAmount"
 ).value="";
@@ -947,8 +1425,8 @@ document.getElementById(
 updateWallet();
 
 alert(
-formatMoney(currency,amount)
-+" demo money added."
+formatMoney(currency,amount)+
+" demo money added."
 );
 
 showScreen("activity");
@@ -956,34 +1434,51 @@ showScreen("activity");
 }
 
 
+/* ---------------------------
+   SEND
+---------------------------- */
+
 function sendMoney(){
 
-const recipient =
+const recipient=
 document.getElementById(
 "recipient"
 ).value.trim();
 
-const amount =
+const amount=
 parseFloat(
 document.getElementById(
 "sendAmount"
 ).value
 );
 
-const currency =
+const currency=
 document.getElementById(
 "sendCurrency"
 ).value;
 
+
 if(!recipient){
 
 alert(
-"Enter the recipient's $Cashtag."
+"Enter a recipient $Cashtag."
 );
 
 return;
 
 }
+
+
+if(!recipient.startsWith("$")){
+
+alert(
+"Recipient must use a $Cashtag."
+);
+
+return;
+
+}
+
 
 if(!amount || amount<=0){
 
@@ -995,10 +1490,12 @@ return;
 
 }
 
+
 if(amount>wallet[currency]){
 
 alert(
-"Insufficient "+currency+
+"Insufficient "+
+currency+
 " demo balance."
 );
 
@@ -1006,7 +1503,9 @@ return;
 
 }
 
+
 wallet[currency]-=amount;
+
 
 wallet.transactions.unshift({
 
@@ -1024,6 +1523,7 @@ currency:currency,
 date:new Date().toLocaleString()
 
 });
+
 
 document.getElementById(
 "recipient"
@@ -1045,24 +1545,29 @@ showScreen("activity");
 }
 
 
+/* ---------------------------
+   CONVERT
+---------------------------- */
+
 function convertCurrency(){
 
-const from =
+const from=
 document.getElementById(
 "fromCurrency"
 ).value;
 
-const to =
+const to=
 document.getElementById(
 "toCurrency"
 ).value;
 
-const amount =
+const amount=
 parseFloat(
 document.getElementById(
 "convertAmount"
 ).value
 );
+
 
 if(!amount || amount<=0){
 
@@ -1074,21 +1579,24 @@ return;
 
 }
 
+
 if(from===to){
 
 alert(
-"Choose two different currencies."
+"Choose different currencies."
 );
 
 return;
 
 }
+
 
 if(amount>wallet[from]){
 
 alert(
 "Insufficient "+
-from+" demo balance."
+from+
+" demo balance."
 );
 
 return;
@@ -1096,22 +1604,14 @@ return;
 }
 
 
-/*
-Convert through USD.
-
-Example:
-USD → NGN
-
-amount / USD rate × NGN rate
-*/
-
-const usdValue =
-amount /
+const usdValue=
+amount/
 currencies[from].rate;
 
-const converted =
-usdValue *
+const converted=
+usdValue*
 currencies[to].rate;
+
 
 wallet[from]-=amount;
 
@@ -1125,10 +1625,11 @@ type:"convert",
 title:"Currency conversion",
 
 description:
-amount.toFixed(2)+" "+
-from+" → "+
-converted.toFixed(2)+" "+
-to,
+amount.toFixed(2)+
+" "+from+
+" → "+
+converted.toFixed(2)+
+" "+to,
 
 amount:converted,
 
@@ -1146,11 +1647,9 @@ document.getElementById(
 updateWallet();
 
 alert(
-
-formatMoney(from,amount)
-+" converted to "
-+formatMoney(to,converted)
-
+formatMoney(from,amount)+
+" converted to "+
+formatMoney(to,converted)
 );
 
 showScreen("activity");
@@ -1158,14 +1657,19 @@ showScreen("activity");
 }
 
 
+/* ---------------------------
+   ACTIVITY
+---------------------------- */
+
 function renderTransactions(){
 
-const container =
+const container=
 document.getElementById(
 "transactions"
 );
 
 if(!container) return;
+
 
 if(wallet.transactions.length===0){
 
@@ -1190,12 +1694,11 @@ return;
 }
 
 
-container.innerHTML =
-wallet.transactions.map(
-function(tx){
+container.innerHTML=
+wallet.transactions
+.map(function(tx){
 
 let sign="";
-
 let className="";
 
 if(tx.type==="in"){
@@ -1212,15 +1715,8 @@ className="negative";
 
 }
 
-else{
 
-sign="";
-className="";
-
-}
-
-
-return `
+return`
 
 <div class="transaction">
 
@@ -1254,29 +1750,72 @@ tx.amount
 
 `;
 
-}).join("");
+})
+.join("");
 
 }
 
 
+/* ---------------------------
+   COPY CASHTAG
+---------------------------- */
+
 function copyTag(){
+
+if(!account) return;
 
 if(navigator.clipboard){
 
 navigator.clipboard.writeText(
-"$Abdulrahman"
+account.cashtag
 );
 
 }
 
 alert(
-"$Cashtag copied!"
+account.cashtag+
+" copied!"
 );
 
 }
 
 
+/* ---------------------------
+   LOGOUT
+---------------------------- */
+
+function logout(){
+
+showScreen("login");
+
+document.getElementById(
+"loginEmail"
+).value="";
+
+document.getElementById(
+"loginPassword"
+).value="";
+
+}
+
+
+/* ---------------------------
+   START
+---------------------------- */
+
 populateCurrencySelects();
+
+if(account){
+
+loadProfile();
+
+showScreen("home");
+
+}else{
+
+showScreen("signup");
+
+}
 
 updateWallet();
 
