@@ -1,267 +1,592 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexaPay</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaPay</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
-    body {
-      background: #080808;
-      color: white;
-      min-height: 100vh;
-    }
+body{
+  background:#080808;
+  color:#fff;
+  min-height:100vh;
+}
 
-    .app {
-      max-width: 480px;
-      margin: auto;
-      min-height: 100vh;
-      padding: 22px 18px 100px;
-    }
+.app{
+  max-width:480px;
+  margin:auto;
+  min-height:100vh;
+  padding:20px 18px 95px;
+}
 
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-    }
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:28px;
+}
 
-    .logo {
-      font-size: 27px;
-      font-weight: bold;
-      color: #d4af37;
-    }
+.logo{
+  font-size:27px;
+  font-weight:bold;
+  color:#d4af37;
+}
 
-    .profile {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #d4af37;
-      color: #080808;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
+.profile{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#d4af37;
+  color:#080808;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
 
-    .welcome {
-      color: #aaa;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
+.screen{
+  display:none;
+}
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
+.screen.active{
+  display:block;
+}
 
-    .cashtag {
-      color: #d4af37;
-      margin-bottom: 20px;
-    }
+.welcome{
+  color:#999;
+  font-size:14px;
+  margin-bottom:6px;
+}
 
-    .balance-card {
-      background: linear-gradient(135deg, #171717, #252525);
-      border: 1px solid #3a3a3a;
-      border-radius: 22px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-    }
+h1{
+  font-size:28px;
+  margin-bottom:18px;
+}
 
-    .balance-label {
-      color: #aaa;
-      font-size: 14px;
-    }
+.cashtag{
+  color:#d4af37;
+  font-size:15px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
 
-    .balance {
-      font-size: 38px;
-      font-weight: bold;
-      margin: 8px 0;
-    }
+.balance-card{
+  background:linear-gradient(135deg,#171717,#292929);
+  border:1px solid #383838;
+  border-radius:22px;
+  padding:25px;
+  margin-bottom:18px;
+}
 
-    .currency {
-      color: #d4af37;
-      font-size: 14px;
-    }
+.balance-label{
+  color:#aaa;
+  font-size:14px;
+}
 
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
+.balance{
+  font-size:38px;
+  font-weight:bold;
+  margin:8px 0;
+}
 
-    button {
-      border: none;
-      border-radius: 14px;
-      padding: 15px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.currency{
+  color:#d4af37;
+  font-size:14px;
+}
 
-    .primary {
-      background: #d4af37;
-      color: #080808;
-    }
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:28px;
+}
 
-    .secondary {
-      background: #1c1c1c;
-      color: white;
-      border: 1px solid #333;
-    }
+button{
+  border:none;
+  border-radius:14px;
+  padding:15px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    .section-title {
-      font-size: 19px;
-      margin-bottom: 14px;
-    }
+.primary{
+  background:#d4af37;
+  color:#080808;
+}
 
-    .wallet {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #151515;
-      padding: 17px;
-      border-radius: 15px;
-      margin-bottom: 10px;
-      border: 1px solid #252525;
-    }
+.secondary{
+  background:#1b1b1b;
+  color:white;
+  border:1px solid #333;
+}
 
-    .currency-name {
-      font-weight: bold;
-    }
+.section-title{
+  font-size:19px;
+  margin-bottom:14px;
+}
 
-    .currency-code {
-      color: #888;
-      font-size: 12px;
-      margin-top: 4px;
-    }
+.wallet{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#151515;
+  padding:17px;
+  border-radius:15px;
+  margin-bottom:10px;
+  border:1px solid #252525;
+}
 
-    .amount {
-      font-weight: bold;
-    }
+.currency-name{
+  font-weight:bold;
+}
 
-    .bottom {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      max-width: 480px;
-      margin: auto;
-      background: #101010;
-      border-top: 1px solid #292929;
-      display: flex;
-      justify-content: space-around;
-      padding: 14px 5px;
-    }
+.currency-code{
+  color:#888;
+  font-size:12px;
+  margin-top:4px;
+}
 
-    .nav-item {
-      color: #777;
-      text-align: center;
-      font-size: 12px;
-    }
+.amount{
+  font-weight:bold;
+}
 
-    .nav-item.active {
-      color: #d4af37;
-    }
+.form-card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:20px;
+  margin-top:15px;
+}
 
-    .nav-icon {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-  </style>
+label{
+  display:block;
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+input,select{
+  width:100%;
+  padding:15px;
+  background:#0d0d0d;
+  border:1px solid #333;
+  border-radius:12px;
+  color:white;
+  margin-bottom:15px;
+  font-size:15px;
+}
+
+.receive-box{
+  text-align:center;
+  background:#151515;
+  border:1px solid #333;
+  border-radius:20px;
+  padding:28px 20px;
+  margin-top:15px;
+}
+
+.receive-tag{
+  font-size:28px;
+  font-weight:bold;
+  color:#d4af37;
+  margin:15px 0;
+}
+
+.qr{
+  width:150px;
+  height:150px;
+  margin:20px auto;
+  background:white;
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:55px;
+  border-radius:12px;
+}
+
+.transaction{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#151515;
+  border:1px solid #252525;
+  border-radius:15px;
+  padding:16px;
+  margin-bottom:10px;
+}
+
+.transaction small{
+  color:#888;
+  display:block;
+  margin-top:5px;
+}
+
+.positive{
+  color:#4ade80;
+}
+
+.negative{
+  color:#ff6b6b;
+}
+
+.profile-card{
+  background:#151515;
+  border-radius:18px;
+  padding:22px;
+  border:1px solid #292929;
+}
+
+.profile-big{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:#d4af37;
+  color:#080808;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.setting{
+  display:flex;
+  justify-content:space-between;
+  padding:17px 0;
+  border-bottom:1px solid #292929;
+}
+
+.setting:last-child{
+  border-bottom:none;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  max-width:480px;
+  margin:auto;
+  background:#101010;
+  border-top:1px solid #292929;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 4px;
+  z-index:10;
+}
+
+.nav-item{
+  color:#777;
+  text-align:center;
+  font-size:11px;
+  cursor:pointer;
+  min-width:60px;
+}
+
+.nav-item.active{
+  color:#d4af37;
+}
+
+.nav-icon{
+  font-size:20px;
+  margin-bottom:4px;
+}
+
+.back{
+  color:#d4af37;
+  margin-bottom:20px;
+  cursor:pointer;
+  font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <div class="top">
-      <div class="logo">NexaPay</div>
-      <div class="profile">N</div>
-    </div>
+<div class="top">
+  <div class="logo">NexaPay</div>
+  <div class="profile">N</div>
+</div>
 
-    <div class="welcome">Welcome back</div>
-    <h1>Your money, worldwide.</h1>
+<!-- HOME -->
+<div id="home" class="screen active">
 
-    <div class="cashtag">$yourcashtag</div>
+<div class="welcome">Welcome back</div>
+<h1>Your money, worldwide.</h1>
 
-    <div class="balance-card">
-      <div class="balance-label">Total balance</div>
-      <div class="balance">$0.00</div>
-      <div class="currency">USD</div>
-    </div>
+<div class="cashtag">$Abdulrahman</div>
 
-    <div class="actions">
-      <button class="primary">Send Money</button>
-      <button class="secondary">Receive</button>
-    </div>
+<div class="balance-card">
+  <div class="balance-label">Total balance</div>
+  <div class="balance">$0.00</div>
+  <div class="currency">USD</div>
+</div>
 
-    <div class="section-title">Your wallets</div>
+<div class="actions">
+  <button class="primary" onclick="showScreen('send')">Send Money</button>
+  <button class="secondary" onclick="showScreen('receive')">Receive</button>
+</div>
 
-    <div class="wallet">
-      <div>
-        <div class="currency-name">🇺🇸 US Dollar</div>
-        <div class="currency-code">USD</div>
-      </div>
-      <div class="amount">$0.00</div>
-    </div>
+<div class="section-title">Your wallets</div>
 
-    <div class="wallet">
-      <div>
-        <div class="currency-name">🇬🇧 British Pound</div>
-        <div class="currency-code">GBP</div>
-      </div>
-      <div class="amount">£0.00</div>
-    </div>
-
-    <div class="wallet">
-      <div>
-        <div class="currency-name">🇪🇺 Euro</div>
-        <div class="currency-code">EUR</div>
-      </div>
-      <div class="amount">€0.00</div>
-    </div>
-
-    <div class="wallet">
-      <div>
-        <div class="currency-name">🇳🇬 Nigerian Naira</div>
-        <div class="currency-code">NGN</div>
-      </div>
-      <div class="amount">₦0.00</div>
-    </div>
-
+<div class="wallet">
+  <div>
+    <div class="currency-name">🇺🇸 US Dollar</div>
+    <div class="currency-code">USD</div>
   </div>
+  <div class="amount">$0.00</div>
+</div>
 
-  <div class="bottom">
-    <div class="nav-item active">
-      <div class="nav-icon">⌂</div>
-      Home
-    </div>
-
-    <div class="nav-item">
-      <div class="nav-icon">⇄</div>
-      Activity
-    </div>
-
-    <div class="nav-item">
-      <div class="nav-icon">＋</div>
-      Add Money
-    </div>
-
-    <div class="nav-item">
-      <div class="nav-icon">●</div>
-      Profile
-    </div>
+<div class="wallet">
+  <div>
+    <div class="currency-name">🇬🇧 British Pound</div>
+    <div class="currency-code">GBP</div>
   </div>
+  <div class="amount">£0.00</div>
+</div>
+
+<div class="wallet">
+  <div>
+    <div class="currency-name">🇪🇺 Euro</div>
+    <div class="currency-code">EUR</div>
+  </div>
+  <div class="amount">€0.00</div>
+</div>
+
+<div class="wallet">
+  <div>
+    <div class="currency-name">🇳🇬 Nigerian Naira</div>
+    <div class="currency-code">NGN</div>
+  </div>
+  <div class="amount">₦0.00</div>
+</div>
+
+</div>
+
+<!-- SEND -->
+<div id="send" class="screen">
+
+<div class="back" onclick="showScreen('home')">← Back</div>
+
+<h1>Send Money</h1>
+
+<div class="form-card">
+
+<label>Recipient $Cashtag</label>
+<input type="text" id="recipient" placeholder="$username">
+
+<label>Amount</label>
+<input type="number" id="sendAmount" placeholder="0.00">
+
+<label>Currency</label>
+<select>
+<option>USD - US Dollar</option>
+<option>GBP - British Pound</option>
+<option>EUR - Euro</option>
+<option>NGN - Nigerian Naira</option>
+</select>
+
+<button class="primary" style="width:100%" onclick="sendDemo()">
+Send Money
+</button>
+
+</div>
+
+</div>
+
+<!-- RECEIVE -->
+<div id="receive" class="screen">
+
+<div class="back" onclick="showScreen('home')">← Back</div>
+
+<h1>Receive Money</h1>
+
+<div class="receive-box">
+
+<div>Share your NexaPay identity</div>
+
+<div class="receive-tag">$Abdulrahman</div>
+
+<div class="qr">N</div>
+
+<p style="color:#aaa">
+Anyone can use your $Cashtag to send you money.
+</p>
+
+<br>
+
+<button class="primary" style="width:100%" onclick="copyTag()">
+Copy $Cashtag
+</button>
+
+</div>
+
+</div>
+
+<!-- ACTIVITY -->
+<div id="activity" class="screen">
+
+<h1>Activity</h1>
+
+<div class="transaction">
+<div>
+<strong>No transactions yet</strong>
+<small>Your activity will appear here.</small>
+</div>
+<div>—</div>
+</div>
+
+</div>
+
+<!-- ADD MONEY -->
+<div id="add" class="screen">
+
+<h1>Add Money</h1>
+
+<div class="form-card">
+
+<label>Amount</label>
+<input type="number" placeholder="0.00">
+
+<label>Currency</label>
+<select>
+<option>USD - US Dollar</option>
+<option>GBP - British Pound</option>
+<option>EUR - Euro</option>
+<option>NGN - Nigerian Naira</option>
+</select>
+
+<button class="primary" style="width:100%" onclick="demoAdd()">
+Add Demo Money
+</button>
+
+<p style="color:#777;font-size:12px;margin-top:15px;text-align:center">
+Demo mode — no real money is being moved.
+</p>
+
+</div>
+
+</div>
+
+<!-- PROFILE -->
+<div id="profileScreen" class="screen">
+
+<h1>Profile</h1>
+
+<div class="profile-card">
+
+<div class="profile-big">N</div>
+
+<h2>Abdulrahman</h2>
+
+<div class="cashtag">$Abdulrahman</div>
+
+<div class="setting">
+<span>Account</span>
+<span>›</span>
+</div>
+
+<div class="setting">
+<span>Security</span>
+<span>›</span>
+</div>
+
+<div class="setting">
+<span>Notifications</span>
+<span>›</span>
+</div>
+
+<div class="setting">
+<span>Supported currencies</span>
+<span>›</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<div class="bottom">
+
+<div class="nav-item active" onclick="showScreen('home')">
+<div class="nav-icon">⌂</div>
+Home
+</div>
+
+<div class="nav-item" onclick="showScreen('activity')">
+<div class="nav-icon">⇄</div>
+Activity
+</div>
+
+<div class="nav-item" onclick="showScreen('add')">
+<div class="nav-icon">＋</div>
+Add Money
+</div>
+
+<div class="nav-item" onclick="showScreen('profileScreen')">
+<div class="nav-icon">●</div>
+Profile
+</div>
+
+</div>
+
+<script>
+
+function showScreen(screen){
+
+document.querySelectorAll('.screen').forEach(function(page){
+page.classList.remove('active');
+});
+
+document.getElementById(screen).classList.add('active');
+
+window.scrollTo(0,0);
+}
+
+function sendDemo(){
+
+const recipient=document.getElementById("recipient").value;
+const amount=document.getElementById("sendAmount").value;
+
+if(!recipient || !amount){
+alert("Please enter a $Cashtag and amount.");
+return;
+}
+
+alert("Demo payment created for " + recipient + " — $" + amount);
+
+}
+
+function copyTag(){
+
+navigator.clipboard.writeText("$Abdulrahman");
+
+alert("$Cashtag copied!");
+
+}
+
+function demoAdd(){
+
+alert("Demo mode: money was not actually added.");
+
+}
+
+</script>
 
 </body>
-  </html>
+</html>
