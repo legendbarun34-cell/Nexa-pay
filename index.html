@@ -2243,7 +2243,28 @@ showScreen("signup");
 
 
 updateWallet();
+// ==========================================
+// NEXAPAY BACKEND CONNECTION
+// ==========================================
 
+const NEXAPAY_API = "https://nexapay-backend-5axe.onrender.com";
+
+async function connectNexaPayBackend() {
+    try {
+        const response = await fetch(NEXAPAY_API);
+        const data = await response.json();
+
+        console.log("NexaPay Backend:", data);
+
+        if (data.status === "online") {
+            console.log("✅ NexaPay backend connected successfully.");
+        }
+    } catch (error) {
+        console.error("❌ NexaPay backend connection failed:", error);
+    }
+}
+
+connectNexaPayBackend();
 </script>
 
 </body>
