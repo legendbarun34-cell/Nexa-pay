@@ -1729,8 +1729,8 @@ let totalUSD=0;
 Object.keys(currencies)
 .forEach(function(currency){
 
-totalUSD+=
-wallet[currency]/
+totalUSD +=
+(Number(wallet[currency]) || 0) /
 currencies[currency].rate;
 
 });
