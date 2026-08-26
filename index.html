@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>NexaPay</title>
 
 <style>
+
 *{
 box-sizing:border-box;
 margin:0;
@@ -39,8 +46,13 @@ font-weight:bold;
 color:#d4af37
 }
 
-.screen{display:none}
-.screen.active{display:block}
+.screen{
+display:none
+}
+
+.screen.active{
+display:block
+}
 
 h1{
 font-size:28px;
@@ -152,7 +164,8 @@ font-size:13px;
 margin-bottom:7px
 }
 
-input,select{
+input,
+select{
 width:100%;
 padding:15px;
 background:#0d0d0d;
@@ -398,76 +411,137 @@ margin-top:10px
 .crypto{
 color:#f7931a
 }
+
+.backend-status{
+font-size:11px;
+color:#999;
+text-align:center;
+margin-top:-20px;
+margin-bottom:20px
+}
+
+.backend-status.connected{
+color:#4ade80
+}
+
+.backend-status.error{
+color:#ff6b6b
+}
+
+.loading{
+opacity:.6;
+pointer-events:none
+}
+
 </style>
+
 </head>
+
 
 <body>
 
 <div class="app">
 
+
 <!-- SIGN UP -->
 
-<div id="signup" class="screen active">
+<div
+id="signup"
+class="screen active">
 
-<div class="logo">NexaPay</div>
+<div class="logo">
+NexaPay
+</div>
 
-<h1>Create your account</h1>
+<div
+id="backendStatus"
+class="backend-status">
+
+Checking NexaPay connection...
+
+</div>
+
+<h1>
+Create your account
+</h1>
 
 <div class="subtitle">
-Create your NexaPay prototype account and choose your unique $Cashtag.
+
+Create your NexaPay account and choose your unique $Cashtag.
+
 </div>
+
 
 <div class="form-card">
 
-<label>Your name</label>
+<label>
+Your name
+</label>
 
 <input
 id="signupName"
 type="text"
-placeholder="Your name"
->
+placeholder="Your name">
 
-<label>Email</label>
+
+<label>
+Email
+</label>
 
 <input
 id="signupEmail"
 type="email"
-placeholder="example@email.com"
->
+placeholder="example@email.com">
 
-<label>Choose your $Cashtag</label>
+
+<label>
+Choose your $Cashtag
+</label>
 
 <input
 id="signupTag"
 type="text"
-placeholder="$YourName"
->
+placeholder="$YourName">
 
-<label>Demo password</label>
+
+<label>
+Password
+</label>
 
 <input
 id="signupPassword"
 type="password"
-placeholder="Create a demo password"
->
+placeholder="Create your password">
+
 
 <button
+id="signupButton"
 class="primary"
+style="width:100%"
 onclick="createAccount()">
 
 Create NexaPay Account
 
 </button>
 
+
 <div class="notice">
-Prototype mode: this account is stored only in this browser.
-Do not use a real password or sensitive information.
+
+Your NexaPay account is connected to the NexaPay backend.
+
 </div>
 
 </div>
+
 
 <div
-style="color:#d4af37;text-align:center;margin-top:18px;font-size:14px;cursor:pointer"
+style="
+color:#d4af37;
+text-align:center;
+margin-top:18px;
+font-size:14px;
+cursor:pointer
+"
 onclick="showScreen('login')">
 
 Already have an account? Log in
@@ -477,38 +551,54 @@ Already have an account? Log in
 </div>
 
 
+
 <!-- LOGIN -->
 
-<div id="login" class="screen">
+<div
+id="login"
+class="screen">
 
-<div class="logo">NexaPay</div>
+<div class="logo">
+NexaPay
+</div>
 
-<h1>Welcome back</h1>
+<h1>
+Welcome back
+</h1>
 
 <div class="subtitle">
-Log in to your NexaPay prototype account.
+
+Log in to your NexaPay account.
+
 </div>
+
 
 <div class="form-card">
 
-<label>Email</label>
+<label>
+Email
+</label>
 
 <input
 id="loginEmail"
 type="email"
-placeholder="Your email"
->
+placeholder="Your email">
 
-<label>Password</label>
+
+<label>
+Password
+</label>
 
 <input
 id="loginPassword"
 type="password"
-placeholder="Your demo password"
->
+placeholder="Your password">
+
 
 <button
+id="loginButton"
 class="primary"
+style="width:100%"
 onclick="login()">
 
 Log In
@@ -517,8 +607,15 @@ Log In
 
 </div>
 
+
 <div
-style="color:#d4af37;text-align:center;margin-top:18px;font-size:14px;cursor:pointer"
+style="
+color:#d4af37;
+text-align:center;
+margin-top:18px;
+font-size:14px;
+cursor:pointer
+"
 onclick="showScreen('signup')">
 
 Create a new account
@@ -528,15 +625,19 @@ Create a new account
 </div>
 
 
+
 <!-- HOME -->
 
-<div id="home" class="screen">
+<div
+id="home"
+class="screen">
 
 <div class="top">
 
 <div class="logo-small">
 NexaPay
 </div>
+
 
 <div
 class="profile"
@@ -548,27 +649,33 @@ A
 
 </div>
 
+
 <div class="welcome">
 Welcome back
 </div>
 
+
 <h1 id="homeName">
-Abdulrahman
+NexaPay User
 </h1>
+
 
 <div
 class="cashtag"
 id="homeTag">
 
-$Abdulrahman
+$NexaPay
 
 </div>
+
+
 
 <div class="balance-card">
 
 <div class="balance-label">
 Total USD value
 </div>
+
 
 <div
 class="balance"
@@ -578,11 +685,14 @@ $0.00
 
 </div>
 
+
 <div class="currency">
 Multi-currency wallet
 </div>
 
 </div>
+
+
 
 <div class="actions">
 
@@ -594,6 +704,7 @@ Send Money
 
 </button>
 
+
 <button
 class="secondary"
 onclick="showScreen('receive')">
@@ -604,15 +715,22 @@ Receive
 
 </div>
 
+
+
 <div class="section-title">
 Your wallets
 </div>
 
+
 <div id="walletList"></div>
+
 
 <button
 class="secondary"
-style="width:100%;margin-top:10px"
+style="
+width:100%;
+margin-top:10px
+"
 onclick="showScreen('convert')">
 
 ⇄ Convert Currency
@@ -622,9 +740,12 @@ onclick="showScreen('convert')">
 </div>
 
 
+
 <!-- SEND -->
 
-<div id="send" class="screen">
+<div
+id="send"
+class="screen">
 
 <div
 class="back"
@@ -634,36 +755,52 @@ onclick="showScreen('home')">
 
 </div>
 
-<h1>Send Money</h1>
+
+<h1>
+Send Money
+</h1>
+
 
 <div class="form-card">
 
-<label>Find recipient</label>
+<label>
+Find recipient
+</label>
+
 
 <input
 id="recipientSearch"
 type="text"
 placeholder="$Cashtag"
-oninput="searchUsers()"
->
+oninput="searchUsers()">
+
 
 <div id="searchResults"></div>
 
+
 <div id="selectedRecipient"></div>
 
-<label>Amount</label>
+
+<label>
+Amount
+</label>
+
 
 <input
 id="sendAmount"
 type="number"
 min="0"
 step="0.00000001"
-placeholder="0.00"
->
+placeholder="0.00">
 
-<label>Currency</label>
+
+<label>
+Currency
+</label>
+
 
 <select id="sendCurrency"></select>
+
 
 <button
 class="primary"
@@ -676,16 +813,22 @@ Send Money
 
 </div>
 
+
 <div class="notice">
-Search for a demo user's $Cashtag before sending.
+
+Search for a NexaPay user by their $Cashtag before sending.
+
 </div>
 
 </div>
+
 
 
 <!-- RECEIVE -->
 
-<div id="receive" class="screen">
+<div
+id="receive"
+class="screen">
 
 <div
 class="back"
@@ -695,29 +838,42 @@ onclick="showScreen('home')">
 
 </div>
 
-<h1>Receive Money</h1>
+
+<h1>
+Receive Money
+</h1>
+
 
 <div class="receive-box">
 
-<div>Your NexaPay payment identity</div>
+<div>
+Your NexaPay payment identity
+</div>
+
 
 <div
 class="receive-tag"
 id="receiveTag">
 
-$Abdulrahman
+$NexaPay
 
 </div>
+
 
 <div class="qr">
 N
 </div>
 
+
 <p style="color:#aaa">
+
 Share your $Cashtag with anyone who wants to send you money.
+
 </p>
 
+
 <br>
+
 
 <button
 class="primary"
@@ -733,38 +889,54 @@ Copy $Cashtag
 </div>
 
 
+
 <!-- CONVERT -->
 
-<div id="convert" class="screen">
+<div
+id="convert"
+class="screen">
 
 <div
 class="back"
 onclick="showScreen('home')">
 
 ← Back
+
 </div>
 
-<h1>Convert Currency</h1>
+
+<h1>
+Convert Currency
+</h1>
+
 
 <div class="form-card">
 
-<label>From</label>
+<label>
+From
+</label>
 
 <select id="fromCurrency"></select>
 
-<label>Amount</label>
+
+<label>
+Amount
+</label>
 
 <input
 id="convertAmount"
 type="number"
 min="0"
 step="0.00000001"
-placeholder="0.00"
->
+placeholder="0.00">
 
-<label>To</label>
+
+<label>
+To
+</label>
 
 <select id="toCurrency"></select>
+
 
 <button
 class="primary"
@@ -775,47 +947,68 @@ Convert
 
 </button>
 
+
 <div class="notice">
+
 Demo exchange rates only. They are not live rates.
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 
 
 <!-- ACTIVITY -->
 
-<div id="activity" class="screen">
+<div
+id="activity"
+class="screen">
 
-<h1>Activity</h1>
+<h1>
+Activity
+</h1>
 
 <div id="transactions"></div>
 
 </div>
 
 
+
 <!-- ADD MONEY -->
 
-<div id="add" class="screen">
+<div
+id="add"
+class="screen">
 
-<h1>Add Money</h1>
+<h1>
+Add Money
+</h1>
+
 
 <div class="form-card">
 
-<label>Amount</label>
+<label>
+Amount
+</label>
+
 
 <input
 id="addAmount"
 type="number"
 min="0"
 step="0.00000001"
-placeholder="0.00"
->
+placeholder="0.00">
 
-<label>Currency</label>
+
+<label>
+Currency
+</label>
+
 
 <select id="addCurrency"></select>
+
 
 <button
 class="primary"
@@ -826,22 +1019,32 @@ Add Demo Money
 
 </button>
 
+
 <div class="notice">
+
 Demo mode — no real money is being moved.
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 
 
 <!-- PROFILE -->
 
-<div id="profileScreen" class="screen">
+<div
+id="profileScreen"
+class="screen">
 
-<h1>Profile</h1>
+<h1>
+Profile
+</h1>
+
 
 <div class="profile-card">
+
 
 <div
 class="profile-big"
@@ -851,39 +1054,75 @@ A
 
 </div>
 
+
 <h2 id="profileName">
-Abdulrahman
+NexaPay User
 </h2>
+
 
 <div
 class="cashtag"
 id="profileTag">
 
-$Abdulrahman
+$NexaPay
 
 </div>
 
-<div class="setting">
-<span>Account</span>
-<span>›</span>
-</div>
 
 <div class="setting">
-<span>Security</span>
-<span>›</span>
+
+<span>
+Account
+</span>
+
+<span>
+›
+</span>
+
 </div>
 
-<div class="setting">
-<span>Notifications</span>
-<span>›</span>
-</div>
 
 <div class="setting">
-<span>Supported currencies</span>
-<span>7</span>
+
+<span>
+Security
+</span>
+
+<span>
+›
+</span>
+
 </div>
+
+
+<div class="setting">
+
+<span>
+Notifications
+</span>
+
+<span>
+›
+</span>
+
+</div>
+
+
+<div class="setting">
+
+<span>
+Supported currencies
+</span>
+
+<span>
+7
+</span>
+
+</div>
+
 
 <br>
+
 
 <button
 class="secondary"
@@ -899,6 +1138,7 @@ Log Out
 </div>
 
 
+
 <!-- NAVIGATION -->
 
 <div
@@ -906,50 +1146,83 @@ id="navigation"
 class="bottom"
 style="display:none">
 
+
 <div
 class="nav-item active"
 onclick="showScreen('home',this)">
 
-<div class="nav-icon">⌂</div>
+<div class="nav-icon">
+⌂
+</div>
+
 Home
 
 </div>
+
+
 
 <div
 class="nav-item"
 onclick="showScreen('activity',this)">
 
-<div class="nav-icon">⇄</div>
+<div class="nav-icon">
+⇄
+</div>
+
 Activity
 
 </div>
+
+
 
 <div
 class="nav-item"
 onclick="showScreen('add',this)">
 
-<div class="nav-icon">＋</div>
+<div class="nav-icon">
+＋
+</div>
+
 Add Money
 
 </div>
+
+
 
 <div
 class="nav-item"
 onclick="showScreen('profileScreen',this)">
 
-<div class="nav-icon">●</div>
+<div class="nav-icon">
+●
+</div>
+
 Profile
 
 </div>
 
+
 </div>
+
+
+</div>
+
 
 
 <script>
 
-/* ==========================
+
+/* ==========================================
+   NEXAPAY BACKEND
+========================================== */
+
+const NEXAPAY_API =
+"https://nexapay-backend-5axe.onrender.com";
+
+
+/* ==========================================
    CURRENCY DATA
-========================== */
+========================================== */
 
 const currencies={
 
@@ -998,43 +1271,9 @@ rate:110000
 };
 
 
-/* ==========================
-   DEMO USER DIRECTORY
-========================== */
-
-const demoUsers=[
-
-{
-name:"Sarah Williams",
-cashtag:"$Sarah"
-},
-
-{
-name:"David Johnson",
-cashtag:"$David"
-},
-
-{
-name:"Alex Morgan",
-cashtag:"$Alex"
-},
-
-{
-name:"Nexa Business",
-cashtag:"$Nexa"
-},
-
-{
-name:"James Carter",
-cashtag:"$James"
-}
-
-];
-
-
-/* ==========================
-   ACCOUNT
-========================== */
+/* ==========================================
+   ACCOUNT SESSION
+========================================== */
 
 let account=
 JSON.parse(
@@ -1042,10 +1281,9 @@ localStorage.getItem("nexaAccount")
 );
 
 
-/* ==========================
+/* ==========================================
    WALLET
-   BTC NaN PROTECTION
-========================== */
+========================================== */
 
 let wallet=
 JSON.parse(
@@ -1062,6 +1300,7 @@ wallet.AED=Number(wallet.AED)||0;
 wallet.CAD=Number(wallet.CAD)||0;
 wallet.BTC=Number(wallet.BTC)||0;
 
+
 wallet.transactions=
 Array.isArray(wallet.transactions)
 ?wallet.transactions
@@ -1070,10 +1309,12 @@ Array.isArray(wallet.transactions)
 
 let selectedRecipient=null;
 
+let backendUsers=[];
 
-/* ==========================
+
+/* ==========================================
    SAVE
-========================== */
+========================================== */
 
 function saveAccount(){
 
@@ -1095,44 +1336,122 @@ JSON.stringify(wallet)
 }
 
 
-/* ==========================
+/* ==========================================
+   BACKEND CONNECTION CHECK
+========================================== */
+
+async function connectNexaPayBackend(){
+
+const status=
+document.getElementById("backendStatus");
+
+
+try{
+
+const response=
+await fetch(
+NEXAPAY_API+"/api/health"
+);
+
+
+const data=
+await response.json();
+
+
+if(
+response.ok &&
+data.status==="healthy"
+){
+
+status.textContent=
+"● NexaPay backend connected";
+
+status.className=
+"backend-status connected";
+
+
+console.log(
+"✅ NexaPay backend connected:",
+data
+);
+
+return true;
+
+}
+
+
+throw new Error(
+"Backend is not healthy"
+);
+
+}
+
+catch(error){
+
+console.error(
+"❌ Backend connection failed:",
+error
+);
+
+
+status.textContent=
+"● Backend connection unavailable";
+
+status.className=
+"backend-status error";
+
+return false;
+
+}
+
+}
+
+
+/* ==========================================
    SCREEN NAVIGATION
-========================== */
+========================================== */
 
 function showScreen(screen,nav){
 
-document.querySelectorAll(".screen")
+document
+.querySelectorAll(".screen")
 .forEach(function(page){
 
 page.classList.remove("active");
 
 });
 
-document.getElementById(screen)
+
+document
+.getElementById(screen)
 .classList.add("active");
 
 
 if(account){
 
-document.getElementById(
-"navigation"
-).style.display="flex";
+document
+.getElementById("navigation")
+.style.display="flex";
 
-}else{
+}
 
-document.getElementById(
-"navigation"
-).style.display="none";
+else{
+
+document
+.getElementById("navigation")
+.style.display="none";
 
 }
 
 
-document.querySelectorAll(".nav-item")
+document
+.querySelectorAll(".nav-item")
 .forEach(function(item){
 
 item.classList.remove("active");
 
 });
+
 
 if(nav){
 
@@ -1140,39 +1459,57 @@ nav.classList.add("active");
 
 }
 
+
 window.scrollTo(0,0);
 
 }
 
 
-/* ==========================
+/* ==========================================
    CREATE ACCOUNT
-========================== */
+========================================== */
 
-function createAccount(){
+async function createAccount(){
 
 const name=
-document.getElementById(
-"signupName"
-).value.trim();
+document
+.getElementById("signupName")
+.value
+.trim();
+
 
 const email=
-document.getElementById(
-"signupEmail"
-).value.trim();
+document
+.getElementById("signupEmail")
+.value
+.trim()
+.toLowerCase();
 
-let tag=
-document.getElementById(
-"signupTag"
-).value.trim();
+
+let cashtag=
+document
+.getElementById("signupTag")
+.value
+.trim();
+
 
 const password=
-document.getElementById(
-"signupPassword"
-).value;
+document
+.getElementById("signupPassword")
+.value;
 
 
-if(!name||!email||!tag||!password){
+const button=
+document
+.getElementById("signupButton");
+
+
+if(
+!name ||
+!email ||
+!cashtag ||
+!password
+){
 
 alert(
 "Please complete all fields."
@@ -1183,14 +1520,18 @@ return;
 }
 
 
-if(!tag.startsWith("$")){
+if(
+!cashtag.startsWith("$")
+){
 
-tag="$"+tag;
+cashtag="$"+cashtag;
 
 }
 
 
-if(tag.length<3){
+if(
+cashtag.length<3
+){
 
 alert(
 "Your $Cashtag is too short."
@@ -1201,7 +1542,9 @@ return;
 }
 
 
-if(tag.includes(" ")){
+if(
+cashtag.includes(" ")
+){
 
 alert(
 "$Cashtag cannot contain spaces."
@@ -1212,66 +1555,164 @@ return;
 }
 
 
-account={
+try{
+
+
+button.textContent=
+"Creating account...";
+
+button.classList.add("loading");
+
+button.disabled=true;
+
+
+const response=
+await fetch(
+NEXAPAY_API+
+"/api/users/register",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
 
 name:name,
+
 email:email,
-cashtag:tag,
+
+cashtag:cashtag,
+
 password:password
+
+})
+
+}
+);
+
+
+const data=
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+
+data.error ||
+data.message ||
+"Unable to create account."
+
+);
+
+}
+
+
+/* Save logged-in session */
+
+account={
+
+name:
+data.user?.name ||
+data.name ||
+name,
+
+email:
+data.user?.email ||
+data.email ||
+email,
+
+cashtag:
+data.user?.cashtag ||
+data.cashtag ||
+cashtag
 
 };
 
 
 saveAccount();
 
+
 loadProfile();
 
+
 alert(
-"Your NexaPay demo account has been created."
+"🎉 Your NexaPay account has been created successfully!"
 );
+
 
 showScreen("home");
 
+
+loadBackendUsers();
+
 }
 
+catch(error){
 
-/* ==========================
-   LOGIN
-========================== */
-
-function login(){
-
-if(!account){
-
-alert(
-"No demo account exists yet."
+console.error(
+"Registration error:",
+error
 );
 
-showScreen("signup");
 
-return;
+alert(
+"Account creation failed: "+
+error.message
+);
+
+}
+
+finally{
+
+button.textContent=
+"Create NexaPay Account";
+
+button.classList.remove("loading");
+
+button.disabled=false;
+
+}
 
 }
 
 
+/* ==========================================
+   LOGIN
+========================================== */
+
+async function login(){
+
 const email=
-document.getElementById(
-"loginEmail"
-).value.trim();
+document
+.getElementById("loginEmail")
+.value
+.trim()
+.toLowerCase();
+
 
 const password=
-document.getElementById(
-"loginPassword"
-).value;
+document
+.getElementById("loginPassword")
+.value;
+
+
+const button=
+document
+.getElementById("loginButton");
 
 
 if(
-email!==account.email||
-password!==account.password
+!email ||
+!password
 ){
 
 alert(
-"Incorrect demo login details."
+"Please enter your email and password."
 );
 
 return;
@@ -1279,20 +1720,187 @@ return;
 }
 
 
-loadProfile();
+try{
 
-showScreen("home");
+
+button.textContent=
+"Logging in...";
+
+button.classList.add("loading");
+
+button.disabled=true;
+
+
+const response=
+await fetch(
+NEXAPAY_API+
+"/api/login",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+
+email:email,
+
+password:password
+
+})
+
+}
+);
+
+
+const data=
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+
+data.error ||
+data.message ||
+"Login failed."
+
+);
 
 }
 
 
-/* ==========================
+const user=
+data.user ||
+data;
+
+
+/* Save user session */
+
+account={
+
+name:
+user.name,
+
+email:
+user.email,
+
+cashtag:
+user.cashtag
+
+};
+
+
+saveAccount();
+
+
+loadProfile();
+
+
+alert(
+"Welcome back to NexaPay! 💪"
+);
+
+
+showScreen("home");
+
+
+loadBackendUsers();
+
+}
+
+catch(error){
+
+console.error(
+"Login error:",
+error
+);
+
+
+alert(
+"Login failed: "+
+error.message
+);
+
+}
+
+finally{
+
+button.textContent=
+"Log In";
+
+button.classList.remove("loading");
+
+button.disabled=false;
+
+}
+
+}
+
+
+/* ==========================================
+   LOAD BACKEND USERS
+========================================== */
+
+async function loadBackendUsers(){
+
+try{
+
+const response=
+await fetch(
+NEXAPAY_API+
+"/api/users"
+);
+
+
+const data=
+await response.json();
+
+
+if(response.ok){
+
+backendUsers=
+Array.isArray(data)
+?data
+:
+(
+data.users ||
+[]
+);
+
+
+console.log(
+"👥 NexaPay users loaded:",
+backendUsers
+);
+
+}
+
+}
+
+catch(error){
+
+console.error(
+"Unable to load users:",
+error
+);
+
+}
+
+}
+
+
+/* ==========================================
    PROFILE
-========================== */
+========================================== */
 
 function loadProfile(){
 
 if(!account)return;
+
 
 const initial=
 account.name
@@ -1300,76 +1908,75 @@ account.name
 .toUpperCase();
 
 
-document.getElementById(
-"homeName"
-).textContent=
+document
+.getElementById("homeName")
+.textContent=
 account.name;
 
 
-document.getElementById(
-"homeTag"
-).textContent=
+document
+.getElementById("homeTag")
+.textContent=
 account.cashtag;
 
 
-document.getElementById(
-"receiveTag"
-).textContent=
+document
+.getElementById("receiveTag")
+.textContent=
 account.cashtag;
 
 
-document.getElementById(
-"profileName"
-).textContent=
+document
+.getElementById("profileName")
+.textContent=
 account.name;
 
 
-document.getElementById(
-"profileTag"
-).textContent=
+document
+.getElementById("profileTag")
+.textContent=
 account.cashtag;
 
 
-document.getElementById(
-"profileInitial"
-).textContent=
+document
+.getElementById("profileInitial")
+.textContent=
 initial;
 
 
-document.getElementById(
-"profileBig"
-).textContent=
+document
+.getElementById("profileBig")
+.textContent=
 initial;
 
 }
 
 
-/* ==========================
-   CASHTAG SEARCH
-========================== */
+/* ==========================================
+   USER SEARCH
+========================================== */
 
 function searchUsers(){
 
 const input=
-document.getElementById(
-"recipientSearch"
-).value
+document
+.getElementById("recipientSearch")
+.value
 .trim()
 .toLowerCase();
 
 
 const results=
-document.getElementById(
-"searchResults"
-);
+document
+.getElementById("searchResults");
 
 
 selectedRecipient=null;
 
 
-document.getElementById(
-"selectedRecipient"
-).innerHTML="";
+document
+.getElementById("selectedRecipient")
+.innerHTML="";
 
 
 if(!input){
@@ -1381,63 +1988,56 @@ return;
 }
 
 
+/* Search backend users */
+
 const users=
-demoUsers.filter(function(user){
+backendUsers.filter(function(user){
 
-return user.cashtag
-.toLowerCase()
-.includes(input)
-||
-user.name
-.toLowerCase()
-.includes(input);
-
-});
+const userName=
+String(user.name||"")
+.toLowerCase();
 
 
-if(account&&
-account.cashtag
-.toLowerCase()
-.includes(input)
-){
+const userTag=
+String(user.cashtag||"")
+.toLowerCase();
 
-users.unshift({
 
-name:account.name,
-cashtag:account.cashtag
+return(
+
+userName.includes(input) ||
+userTag.includes(input)
+
+);
 
 });
 
-}
 
+/* Remove current user */
 
-const uniqueUsers=[];
+const filteredUsers=
+users.filter(function(user){
 
+return(
 
-users.forEach(function(user){
+!account ||
+String(user.cashtag).toLowerCase() !==
+String(account.cashtag).toLowerCase()
+
+);
+
+});
+
 
 if(
-!uniqueUsers.some(
-item=>item.cashtag===user.cashtag
-)
+filteredUsers.length===0
 ){
 
-uniqueUsers.push(user);
+results.innerHTML=
 
-}
-
-});
-
-
-if(uniqueUsers.length===0){
-
-results.innerHTML=`
-
-<div class="empty">
-No user found.
-</div>
-
-`;
+`<div class="empty">
+No NexaPay user found.
+</div>`;
 
 return;
 
@@ -1445,7 +2045,7 @@ return;
 
 
 results.innerHTML=
-uniqueUsers
+filteredUsers
 .map(function(user){
 
 return`
@@ -1456,30 +2056,43 @@ return`
 
 <div class="user-avatar">
 
-${user.name
+${String(user.name||"N")
 .charAt(0)
 .toUpperCase()}
 
 </div>
 
+
 <div>
 
 <div class="user-name">
+
 ${user.name}
+
 </div>
+
 
 <div class="user-tag">
+
 ${user.cashtag}
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 
 <button
 class="primary"
-style="width:auto;padding:10px 14px"
-onclick='selectRecipient(${JSON.stringify(user)})'>
+style="
+width:auto;
+padding:10px 14px
+"
+onclick='selectRecipient(${JSON.stringify({
+name:user.name,
+cashtag:user.cashtag
+})})'>
 
 Select
 
@@ -1495,16 +2108,22 @@ Select
 }
 
 
-/* ==========================
+/* ==========================================
    SELECT RECIPIENT
-========================== */
+========================================== */
 
 function selectRecipient(user){
 
 if(
-account&&
-user.cashtag.toLowerCase()===
-account.cashtag.toLowerCase()
+
+account &&
+
+user.cashtag
+.toLowerCase()===
+
+account.cashtag
+.toLowerCase()
+
 ){
 
 alert(
@@ -1519,27 +2138,37 @@ return;
 selectedRecipient=user;
 
 
-document.getElementById(
-"searchResults"
-).innerHTML="";
+document
+.getElementById("searchResults")
+.innerHTML="";
 
 
-document.getElementById(
-"selectedRecipient"
-).innerHTML=`
+document
+.getElementById("selectedRecipient")
+.innerHTML=
+
+`
 
 <div class="selected-user">
 
 <strong>
+
 ${user.name}
+
 </strong>
 
+
 <span style="color:#d4af37">
+
 ${user.cashtag}
+
 </span>
 
+
 <div class="success">
+
 ✓ Recipient selected
+
 </div>
 
 </div>
@@ -1549,9 +2178,9 @@ ${user.cashtag}
 }
 
 
-/* ==========================
+/* ==========================================
    SEND MONEY
-========================== */
+========================================== */
 
 function sendMoney(){
 
@@ -1568,19 +2197,22 @@ return;
 
 const amount=
 Number(
-document.getElementById(
-"sendAmount"
-).value
+document
+.getElementById("sendAmount")
+.value
 );
 
 
 const currency=
-document.getElementById(
-"sendCurrency"
-).value;
+document
+.getElementById("sendCurrency")
+.value;
 
 
-if(!Number.isFinite(amount)||amount<=0){
+if(
+!Number.isFinite(amount) ||
+amount<=0
+){
 
 alert(
 "Enter a valid amount."
@@ -1591,12 +2223,14 @@ return;
 }
 
 
-if(amount>wallet[currency]){
+if(
+amount>wallet[currency]
+){
 
 alert(
 "Insufficient "+
 currency+
-" demo balance."
+" balance."
 );
 
 return;
@@ -1625,29 +2259,31 @@ amount:amount,
 
 currency:currency,
 
-date:new Date().toLocaleString()
+date:
+new Date()
+.toLocaleString()
 
 });
 
 
-document.getElementById(
-"recipientSearch"
-).value="";
+document
+.getElementById("recipientSearch")
+.value="";
 
 
-document.getElementById(
-"sendAmount"
-).value="";
+document
+.getElementById("sendAmount")
+.value="";
 
 
-document.getElementById(
-"searchResults"
-).innerHTML="";
+document
+.getElementById("searchResults")
+.innerHTML="";
 
 
-document.getElementById(
-"selectedRecipient"
-).innerHTML="";
+document
+.getElementById("selectedRecipient")
+.innerHTML="";
 
 
 selectedRecipient=null;
@@ -1657,7 +2293,7 @@ updateWallet();
 
 
 alert(
-"Demo payment sent successfully."
+"Payment recorded successfully."
 );
 
 
@@ -1666,17 +2302,20 @@ showScreen("activity");
 }
 
 
-/* ==========================
+/* ==========================================
    CURRENCY SELECTS
-========================== */
+========================================== */
 
 function populateCurrencySelects(){
 
 const ids=[
 
 "sendCurrency",
+
 "fromCurrency",
+
 "toCurrency",
+
 "addCurrency"
 
 ];
@@ -1687,17 +2326,22 @@ ids.forEach(function(id){
 const select=
 document.getElementById(id);
 
+
 select.innerHTML="";
 
 
 Object.keys(currencies)
 .forEach(function(code){
 
-select.innerHTML+=`
+select.innerHTML+=
+
+`
 
 <option value="${code}">
+
 ${code} -
 ${currencies[code].name}
+
 </option>
 
 `;
@@ -1707,41 +2351,52 @@ ${currencies[code].name}
 });
 
 
-document.getElementById(
-"toCurrency"
-).value="NGN";
+document
+.getElementById("toCurrency")
+.value="NGN";
 
 }
 
 
-/* ==========================
+/* ==========================================
    MONEY FORMATTING
-========================== */
+========================================== */
 
-function formatMoney(currency,amount){
+function formatMoney(
+currency,
+amount
+){
 
 const value=
 Number(amount)||0;
 
 
-return currencies[currency].symbol+
+return
+
+currencies[currency].symbol+
+
 value.toLocaleString(
+
 undefined,
+
 {
+
 minimumFractionDigits:
 currency==="BTC"?8:2,
 
 maximumFractionDigits:
 currency==="BTC"?8:2
+
 }
+
 );
 
 }
 
 
-/* ==========================
+/* ==========================================
    UPDATE WALLET
-========================== */
+========================================== */
 
 function updateWallet(){
 
@@ -1756,9 +2411,9 @@ saveWallet();
 }
 
 
-/* ==========================
+/* ==========================================
    TOTAL USD VALUE
-========================== */
+========================================== */
 
 function updateTotal(){
 
@@ -1770,6 +2425,7 @@ Object.keys(currencies)
 
 const amount=
 Number(wallet[currency])||0;
+
 
 const rate=
 Number(currencies[currency].rate)||0;
@@ -1785,31 +2441,39 @@ amount/rate;
 });
 
 
-document.getElementById(
-"totalBalance"
-).textContent=
+document
+.getElementById("totalBalance")
+.textContent=
+
 "$"+
+
 totalUSD.toLocaleString(
+
 undefined,
+
 {
+
 minimumFractionDigits:2,
+
 maximumFractionDigits:2
+
 }
+
 );
 
 }
 
 
-/* ==========================
+/* ==========================================
    RENDER WALLETS
-========================== */
+========================================== */
 
 function renderWallets(){
 
 const container=
-document.getElementById(
-"walletList"
-);
+document
+.getElementById("walletList");
+
 
 if(!container)return;
 
@@ -1824,7 +2488,9 @@ const info=
 currencies[currency];
 
 
-container.innerHTML+=`
+container.innerHTML+=
+
+`
 
 <div class="wallet">
 
@@ -1837,11 +2503,15 @@ ${info.name}
 
 </div>
 
+
 <div class="currency-code">
+
 ${currency}
+
 </div>
 
 </div>
+
 
 <div class="amount">
 
@@ -1861,27 +2531,30 @@ wallet[currency]
 }
 
 
-/* ==========================
+/* ==========================================
    ADD DEMO MONEY
-========================== */
+========================================== */
 
 function addDemoMoney(){
 
 const amount=
 Number(
-document.getElementById(
-"addAmount"
-).value
+document
+.getElementById("addAmount")
+.value
 );
 
 
 const currency=
-document.getElementById(
-"addCurrency"
-).value;
+document
+.getElementById("addCurrency")
+.value;
 
 
-if(!Number.isFinite(amount)||amount<=0){
+if(
+!Number.isFinite(amount) ||
+amount<=0
+){
 
 alert(
 "Enter a valid amount."
@@ -1893,6 +2566,7 @@ return;
 
 
 wallet[currency]=
+
 (Number(wallet[currency])||0)+
 amount;
 
@@ -1912,22 +2586,29 @@ amount:amount,
 
 currency:currency,
 
-date:new Date().toLocaleString()
+date:
+new Date()
+.toLocaleString()
 
 });
 
 
-document.getElementById(
-"addAmount"
-).value="";
+document
+.getElementById("addAmount")
+.value="";
 
 
 updateWallet();
 
 
 alert(
-formatMoney(currency,amount)+
-" demo money added."
+
+formatMoney(
+currency,
+amount
+)+
+" added."
+
 );
 
 
@@ -1936,33 +2617,36 @@ showScreen("activity");
 }
 
 
-/* ==========================
+/* ==========================================
    CONVERT CURRENCY
-========================== */
+========================================== */
 
 function convertCurrency(){
 
 const from=
-document.getElementById(
-"fromCurrency"
-).value;
+document
+.getElementById("fromCurrency")
+.value;
 
 
 const to=
-document.getElementById(
-"toCurrency"
-).value;
+document
+.getElementById("toCurrency")
+.value;
 
 
 const amount=
 Number(
-document.getElementById(
-"convertAmount"
-).value
+document
+.getElementById("convertAmount")
+.value
 );
 
 
-if(!Number.isFinite(amount)||amount<=0){
+if(
+!Number.isFinite(amount) ||
+amount<=0
+){
 
 alert(
 "Enter a valid amount."
@@ -1992,7 +2676,7 @@ amount>
 alert(
 "Insufficient "+
 from+
-" demo balance."
+" balance."
 );
 
 return;
@@ -2033,39 +2717,59 @@ type:"convert",
 title:"Currency conversion",
 
 description:
+
 amount.toFixed(
 from==="BTC"?8:2
 )+
+
 " "+
+
 from+
+
 " → "+
+
 converted.toFixed(
 to==="BTC"?8:2
 )+
+
 " "+
+
 to,
+
 
 amount:converted,
 
 currency:to,
 
-date:new Date().toLocaleString()
+date:
+new Date()
+.toLocaleString()
 
 });
 
 
-document.getElementById(
-"convertAmount"
-).value="";
+document
+.getElementById("convertAmount")
+.value="";
 
 
 updateWallet();
 
 
 alert(
-formatMoney(from,amount)+
+
+formatMoney(
+from,
+amount
+)+
+
 " converted to "+
-formatMoney(to,converted)
+
+formatMoney(
+to,
+converted
+)
+
 );
 
 
@@ -2074,23 +2778,27 @@ showScreen("activity");
 }
 
 
-/* ==========================
+/* ==========================================
    ACTIVITY
-========================== */
+========================================== */
 
 function renderTransactions(){
 
 const container=
-document.getElementById(
-"transactions"
-);
+document
+.getElementById("transactions");
+
 
 if(!container)return;
 
 
-if(wallet.transactions.length===0){
+if(
+wallet.transactions.length===0
+){
 
-container.innerHTML=`
+container.innerHTML=
+
+`
 
 <div class="empty">
 
@@ -2110,16 +2818,19 @@ return;
 
 
 container.innerHTML=
+
 wallet.transactions
 .map(function(tx){
 
 let sign="";
+
 let className="";
 
 
 if(tx.type==="in"){
 
 sign="+";
+
 className="positive";
 
 }
@@ -2128,34 +2839,47 @@ className="positive";
 else if(tx.type==="out"){
 
 sign="-";
+
 className="negative";
 
 }
 
 
-return`
+return
+
+`
 
 <div class="transaction">
 
 <div>
 
 <strong>
+
 ${tx.title}
+
 </strong>
 
-<small>
-${tx.description}
-</small>
 
 <small>
+
+${tx.description}
+
+</small>
+
+
+<small>
+
 ${tx.date}
+
 </small>
 
 </div>
 
+
 <div class="${className}">
 
 ${sign}
+
 ${formatMoney(
 tx.currency,
 tx.amount
@@ -2173,16 +2897,18 @@ tx.amount
 }
 
 
-/* ==========================
+/* ==========================================
    COPY CASHTAG
-========================== */
+========================================== */
 
 function copyTag(){
 
 if(!account)return;
 
 
-if(navigator.clipboard){
+if(
+navigator.clipboard
+){
 
 navigator.clipboard.writeText(
 account.cashtag
@@ -2199,32 +2925,54 @@ account.cashtag+
 }
 
 
-/* ==========================
+/* ==========================================
    LOGOUT
-========================== */
+========================================== */
 
 function logout(){
+
+account=null;
+
+
+localStorage.removeItem(
+"nexaAccount"
+);
+
 
 showScreen("login");
 
 
-document.getElementById(
-"loginEmail"
-).value="";
+document
+.getElementById("loginEmail")
+.value="";
 
 
-document.getElementById(
-"loginPassword"
-).value="";
+document
+.getElementById("loginPassword")
+.value="";
+
+
+alert(
+"You have logged out."
+);
 
 }
 
 
-/* ==========================
-   START APP
-========================== */
+/* ==========================================
+   START NEXAPAY
+========================================== */
 
 populateCurrencySelects();
+
+
+updateWallet();
+
+
+connectNexaPayBackend();
+
+
+loadBackendUsers();
 
 
 if(account){
@@ -2242,30 +2990,8 @@ showScreen("signup");
 }
 
 
-updateWallet();
-// ==========================================
-// NEXAPAY BACKEND CONNECTION
-// ==========================================
-
-const NEXAPAY_API = "https://nexapay-backend-5axe.onrender.com";
-
-async function connectNexaPayBackend() {
-    try {
-        const response = await fetch(NEXAPAY_API);
-        const data = await response.json();
-
-        console.log("NexaPay Backend:", data);
-
-        if (data.status === "online") {
-            console.log("✅ NexaPay backend connected successfully.");
-        }
-    } catch (error) {
-        console.error("❌ NexaPay backend connection failed:", error);
-    }
-}
-
-connectNexaPayBackend();
 </script>
 
 </body>
+
 </html>
