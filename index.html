@@ -501,8 +501,7 @@ Already have an account? Log in
 
 <div class="logo">NexaPay</div>
 
-<div id="loginStatus" class="backend-status">
-</div>
+<div id="loginStatus" class="backend-status"></div>
 
 <h1>Welcome back</h1>
 
@@ -1116,6 +1115,7 @@ status.textContent=
 
 }
 
+
 const result=
 await apiRequest(
 "/api/health",
@@ -1140,6 +1140,7 @@ status.className=
 
 }
 
+
 if(loginStatus){
 
 loginStatus.textContent=
@@ -1149,6 +1150,7 @@ loginStatus.className=
 "backend-status connected";
 
 }
+
 
 return true;
 
@@ -2142,9 +2144,22 @@ data.message||
 }
 
 
+/* FIXED: BACKEND RETURNS data.transfer.recipient */
+
+const recipientName=
+
+data.transfer &&
+data.transfer.recipient &&
+data.transfer.recipient.name
+
+?data.transfer.recipient.name
+
+:selectedRecipient.name;
+
+
 alert(
 "🎉 Money sent successfully to "+
-data.recipient.name+
+recipientName+
 "!"
 );
 
@@ -2160,6 +2175,11 @@ document
 
 
 document
+.getElementById("searchResults")
+.innerHTML="";
+
+
+document
 .getElementById("selectedRecipient")
 .innerHTML="";
 
@@ -2167,9 +2187,13 @@ document
 selectedRecipient=null;
 
 
+/* REFRESH EVERYTHING */
+
 await loadWallets();
 
 await loadTransactions();
+
+await loadBackendUsers();
 
 
 showScreen("home");
@@ -2178,7 +2202,10 @@ showScreen("home");
 
 catch(error){
 
-console.error(error);
+console.error(
+"Transfer error:",
+error
+);
 
 alert(
 "Transfer failed:\n\n"+
@@ -2296,6 +2323,22 @@ Object.keys(currencies)
 
 const amount=
 Number(wallet[currency])||0;
+
+
+/* BITCOIN */
+
+if(currency==="BTC"){
+
+totalUSD+=
+amount*
+currencies.BTC.rate;
+
+return;
+
+}
+
+
+/* OTHER CURRENCIES */
 
 const rate=
 Number(currencies[currency].rate)||0;
@@ -2606,6 +2649,20 @@ data.message||
 }
 
 
+/* FIXED: BACKEND RETURNS data.conversion.convertedAmount */
+
+const convertedAmount=
+
+data.conversion &&
+Number.isFinite(
+Number(data.conversion.convertedAmount)
+)
+
+?Number(data.conversion.convertedAmount)
+
+:0;
+
+
 document
 .getElementById("convertAmount")
 .value="";
@@ -2620,7 +2677,7 @@ alert(
 "🎉 Currency converted successfully!\n\n"+
 formatMoney(
 to,
-data.convertedAmount
+convertedAmount
 )
 );
 
@@ -2631,7 +2688,10 @@ showScreen("home");
 
 catch(error){
 
-console.error(error);
+console.error(
+"Conversion error:",
+error
+);
 
 alert(
 "Conversion failed:\n\n"+
