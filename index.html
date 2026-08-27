@@ -457,19 +457,15 @@ Create your NexaPay account and choose your unique $Cashtag.
 <div class="form-card">
 
 <label>Your name</label>
-
 <input id="signupName" type="text" placeholder="Your name">
 
 <label>Email</label>
-
 <input id="signupEmail" type="email" placeholder="example@email.com">
 
 <label>Choose your $Cashtag</label>
-
 <input id="signupTag" type="text" placeholder="$YourName">
 
 <label>Password</label>
-
 <input id="signupPassword" type="password" placeholder="Create your password">
 
 <button
@@ -505,6 +501,9 @@ Already have an account? Log in
 
 <div class="logo">NexaPay</div>
 
+<div id="loginStatus" class="backend-status">
+</div>
+
 <h1>Welcome back</h1>
 
 <div class="subtitle">
@@ -514,11 +513,9 @@ Log in to your NexaPay account.
 <div class="form-card">
 
 <label>Email</label>
-
 <input id="loginEmail" type="email" placeholder="Your email">
 
 <label>Password</label>
-
 <input id="loginPassword" type="password" placeholder="Your password">
 
 <button
@@ -552,7 +549,9 @@ Create a new account
 
 <div class="logo-small">NexaPay</div>
 
-<div class="profile" id="profileInitial">N</div>
+<div class="profile" id="profileInitial">
+N
+</div>
 
 </div>
 
@@ -721,7 +720,6 @@ Copy $Cashtag
 <div class="form-card">
 
 <label>From</label>
-
 <select id="fromCurrency"></select>
 
 <label>Amount</label>
@@ -734,7 +732,6 @@ step="0.00000001"
 placeholder="0.00">
 
 <label>To</label>
-
 <select id="toCurrency"></select>
 
 <button
@@ -785,7 +782,6 @@ step="0.00000001"
 placeholder="0.00">
 
 <label>Currency</label>
-
 <select id="addCurrency"></select>
 
 <button
@@ -913,7 +909,6 @@ Profile
 
 <script>
 
-
 /* ==========================================
    NEXAPAY BACKEND
 ========================================== */
@@ -950,9 +945,7 @@ BTC:{name:"Bitcoin",symbol:"₿",rate:110000}
 ========================================== */
 
 let account=null;
-
 let token=null;
-
 
 try{
 
@@ -967,7 +960,6 @@ token=localStorage.getItem(
 }catch(error){
 
 account=null;
-
 token=null;
 
 }
@@ -983,9 +975,7 @@ wallet[currency]=0;
 
 
 let transactions=[];
-
 let selectedRecipient=null;
-
 let backendUsers=[];
 
 
@@ -1000,8 +990,6 @@ localStorage.setItem(
 JSON.stringify(account)
 );
 
-if(token){
-
 localStorage.setItem(
 "nexaToken",
 token
@@ -1009,22 +997,99 @@ token
 
 }
 
+
+/* ==========================================
+   CLEAR SESSION
+========================================== */
+
+function clearSession(){
+
+account=null;
+token=null;
+
+localStorage.removeItem("nexaAccount");
+localStorage.removeItem("nexaToken");
+
 }
 
 
 /* ==========================================
-   AUTHORIZATION HEADERS
+   AUTH HEADERS
 ========================================== */
 
 function authHeaders(){
 
 return{
 
-"Content-Type":"application/json",
-
 "Authorization":"Bearer "+token
 
 };
+
+}
+
+
+/* ==========================================
+   API REQUEST
+========================================== */
+
+async function apiRequest(endpoint,options={}){
+
+const controller=
+new AbortController();
+
+const timeout=
+setTimeout(function(){
+
+controller.abort();
+
+},60000);
+
+
+try{
+
+const response=
+await fetch(
+NEXAPAY_API+endpoint,
+{
+...options,
+signal:controller.signal
+}
+);
+
+
+const text=
+await response.text();
+
+
+let data={};
+
+
+try{
+
+data=text?JSON.parse(text):{};
+
+}catch(error){
+
+data={
+message:text||
+"Invalid response from server."
+};
+
+}
+
+
+return{
+response:response,
+data:data
+};
+
+}
+
+finally{
+
+clearTimeout(timeout);
+
+}
 
 }
 
@@ -1038,20 +1103,31 @@ async function connectNexaPayBackend(){
 const status=
 document.getElementById("backendStatus");
 
+const loginStatus=
+document.getElementById("loginStatus");
+
+
 try{
 
-const response=
-await fetch(
-NEXAPAY_API+"/api/health"
-);
+if(status){
 
-const data=
-await response.json();
+status.textContent=
+"● Connecting to NexaPay...";
+
+}
+
+const result=
+await apiRequest(
+"/api/health",
+{
+method:"GET"
+}
+);
 
 
 if(
-response.ok &&
-data.status==="healthy"
+result.response.ok &&
+result.data.status==="healthy"
 ){
 
 if(status){
@@ -1064,13 +1140,24 @@ status.className=
 
 }
 
+if(loginStatus){
+
+loginStatus.textContent=
+"● NexaPay backend connected";
+
+loginStatus.className=
+"backend-status connected";
+
+}
+
 return true;
 
 }
 
 
 throw new Error(
-"Backend unavailable"
+result.data.message||
+"Backend database unavailable."
 );
 
 }
@@ -1079,15 +1166,28 @@ catch(error){
 
 console.error(error);
 
+
 if(status){
 
 status.textContent=
-"● Backend connection unavailable";
+"● Backend unavailable";
 
 status.className=
 "backend-status error";
 
 }
+
+
+if(loginStatus){
+
+loginStatus.textContent=
+"● Backend unavailable";
+
+loginStatus.className=
+"backend-status error";
+
+}
+
 
 return false;
 
@@ -1202,6 +1302,17 @@ return;
 }
 
 
+if(password.length<6){
+
+alert(
+"Password must be at least 6 characters."
+);
+
+return;
+
+}
+
+
 if(!cashtag.startsWith("$")){
 
 cashtag="$"+cashtag;
@@ -1235,9 +1346,8 @@ button.textContent=
 button.disabled=true;
 
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/users/register",
 {
 
@@ -1260,48 +1370,39 @@ password:password
 );
 
 
-const data=
-await response.json();
+const response=result.response;
+const data=result.data;
 
 
 if(!response.ok){
 
 throw new Error(
-data.message ||
+data.message||
 "Unable to create account."
 );
 
 }
 
 
-const user=data.user;
+if(!data.user||!data.token){
 
+throw new Error(
+"The server did not return a valid login session."
+);
 
-/* SAVE USER */
+}
+
 
 account={
 
-name:user.name,
-
-email:user.email,
-
-cashtag:user.cashtag
+name:data.user.name,
+email:data.user.email,
+cashtag:data.user.cashtag
 
 };
 
 
-/* SAVE JWT TOKEN */
-
 token=data.token;
-
-
-if(!token){
-
-throw new Error(
-"Login token was not received from the server."
-);
-
-}
 
 
 saveAccount();
@@ -1330,7 +1431,7 @@ catch(error){
 console.error(error);
 
 alert(
-"Account creation failed: "+
+"Account creation failed:\n\n"+
 error.message
 );
 
@@ -1390,9 +1491,8 @@ button.textContent=
 button.disabled=true;
 
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/login",
 {
 
@@ -1405,7 +1505,6 @@ headers:{
 body:JSON.stringify({
 
 email:email,
-
 password:password
 
 })
@@ -1414,46 +1513,48 @@ password:password
 );
 
 
-const data=
-await response.json();
+const response=result.response;
+const data=result.data;
 
 
 if(!response.ok){
 
 throw new Error(
-data.message ||
+data.message||
 "Incorrect email or password."
 );
 
 }
 
 
-const user=data.user;
+if(!data.user){
+
+throw new Error(
+"User information was not received."
+);
+
+}
 
 
-account={
-
-name:user.name,
-
-email:user.email,
-
-cashtag:user.cashtag
-
-};
-
-
-/* SAVE JWT TOKEN */
-
-token=data.token;
-
-
-if(!token){
+if(!data.token){
 
 throw new Error(
 "Login token was not received from the server."
 );
 
 }
+
+
+account={
+
+name:data.user.name,
+email:data.user.email,
+cashtag:data.user.cashtag
+
+};
+
+
+token=data.token;
 
 
 saveAccount();
@@ -1482,7 +1583,7 @@ catch(error){
 console.error(error);
 
 alert(
-"Login failed: "+
+"Login failed:\n\n"+
 error.message
 );
 
@@ -1490,7 +1591,8 @@ error.message
 
 finally{
 
-button.textContent="Log In";
+button.textContent=
+"Log In";
 
 button.disabled=false;
 
@@ -1514,9 +1616,8 @@ return;
 
 try{
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/wallets",
 {
 
@@ -1528,14 +1629,29 @@ headers:authHeaders()
 );
 
 
-const data=
-await response.json();
+const response=result.response;
+const data=result.data;
+
+
+if(response.status===401){
+
+clearSession();
+
+alert(
+"Your session has expired. Please log in again."
+);
+
+showScreen("login");
+
+return;
+
+}
 
 
 if(!response.ok){
 
 throw new Error(
-data.message ||
+data.message||
 "Could not load wallets."
 );
 
@@ -1550,7 +1666,8 @@ wallet[currency]=0;
 });
 
 
-data.wallets.forEach(function(item){
+(data.wallets||[])
+.forEach(function(item){
 
 wallet[item.currency]=
 Number(item.balance)||0;
@@ -1591,9 +1708,8 @@ return;
 
 try{
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/transactions",
 {
 
@@ -1605,14 +1721,14 @@ headers:authHeaders()
 );
 
 
-const data=
-await response.json();
+const response=result.response;
+const data=result.data;
 
 
 if(!response.ok){
 
 throw new Error(
-data.message ||
+data.message||
 "Could not load transactions."
 );
 
@@ -1642,7 +1758,7 @@ error
 
 
 /* ==========================================
-   LOAD BACKEND USERS
+   LOAD USERS
 ========================================== */
 
 async function loadBackendUsers(){
@@ -1656,9 +1772,8 @@ return;
 
 try{
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/users",
 {
 
@@ -1670,20 +1785,16 @@ headers:authHeaders()
 );
 
 
-if(!response.ok){
+if(!result.response.ok){
 
 return;
 
 }
 
 
-const data=
-await response.json();
-
-
 backendUsers=
-Array.isArray(data.users)
-?data.users
+Array.isArray(result.data.users)
+?result.data.users
 :[];
 
 }
@@ -1797,13 +1908,7 @@ return;
 }
 
 
-/* Refresh users */
-
-if(backendUsers.length===0){
-
 await loadBackendUsers();
-
-}
 
 
 const users=
@@ -1819,15 +1924,19 @@ String(user.cashtag||"")
 
 
 return(
+
 name.includes(input)||
 tag.includes(input)
+
 );
 
 }).filter(function(user){
 
-return String(user.cashtag)
-.toLowerCase()!==String(account.cashtag)
-.toLowerCase();
+return(
+String(user.cashtag).toLowerCase()!==
+
+String(account.cashtag).toLowerCase()
+);
 
 });
 
@@ -1890,7 +1999,10 @@ function selectRecipient(cashtag){
 const user=
 backendUsers.find(function(item){
 
-return item.cashtag===cashtag;
+return(
+String(item.cashtag).toLowerCase()===
+String(cashtag).toLowerCase()
+);
 
 });
 
@@ -1989,15 +2101,17 @@ button.textContent=
 button.disabled=true;
 
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/transfers/send",
 {
 
 method:"POST",
 
-headers:authHeaders(),
+headers:{
+"Content-Type":"application/json",
+...authHeaders()
+},
 
 body:JSON.stringify({
 
@@ -2014,8 +2128,8 @@ amount:amount
 );
 
 
-const data=
-await response.json();
+const response=result.response;
+const data=result.data;
 
 
 if(!response.ok){
@@ -2035,8 +2149,6 @@ data.recipient.name+
 );
 
 
-/* Clear form */
-
 document
 .getElementById("sendAmount")
 .value="";
@@ -2055,8 +2167,6 @@ document
 selectedRecipient=null;
 
 
-/* Refresh data */
-
 await loadWallets();
 
 await loadTransactions();
@@ -2071,7 +2181,7 @@ catch(error){
 console.error(error);
 
 alert(
-"Transfer failed: "+
+"Transfer failed:\n\n"+
 error.message
 );
 
@@ -2098,11 +2208,8 @@ function populateCurrencySelects(){
 const ids=[
 
 "sendCurrency",
-
 "fromCurrency",
-
 "toCurrency",
-
 "addCurrency"
 
 ];
@@ -2112,6 +2219,7 @@ ids.forEach(function(id){
 
 const select=
 document.getElementById(id);
+
 
 select.innerHTML="";
 
@@ -2212,7 +2320,6 @@ undefined,
 {
 
 minimumFractionDigits:2,
-
 maximumFractionDigits:2
 
 }
@@ -2322,20 +2429,21 @@ button.textContent=
 button.disabled=true;
 
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/wallets/add-money",
 {
 
 method:"POST",
 
-headers:authHeaders(),
+headers:{
+"Content-Type":"application/json",
+...authHeaders()
+},
 
 body:JSON.stringify({
 
 currency:currency,
-
 amount:amount
 
 })
@@ -2344,14 +2452,14 @@ amount:amount
 );
 
 
-const data=
-await response.json();
+const response=result.response;
+const data=result.data;
 
 
 if(!response.ok){
 
 throw new Error(
-data.message ||
+data.message||
 "Could not add money."
 );
 
@@ -2383,7 +2491,7 @@ catch(error){
 console.error(error);
 
 alert(
-"Could not add money: "+
+"Could not add money:\n\n"+
 error.message
 );
 
@@ -2460,22 +2568,22 @@ button.textContent=
 button.disabled=true;
 
 
-const response=
-await fetch(
-NEXAPAY_API+
+const result=
+await apiRequest(
 "/api/wallets/convert",
 {
 
 method:"POST",
 
-headers:authHeaders(),
+headers:{
+"Content-Type":"application/json",
+...authHeaders()
+},
 
 body:JSON.stringify({
 
 from:from,
-
 to:to,
-
 amount:amount
 
 })
@@ -2484,8 +2592,8 @@ amount:amount
 );
 
 
-const data=
-await response.json();
+const response=result.response;
+const data=result.data;
 
 
 if(!response.ok){
@@ -2526,7 +2634,7 @@ catch(error){
 console.error(error);
 
 alert(
-"Conversion failed: "+
+"Conversion failed:\n\n"+
 error.message
 );
 
@@ -2591,14 +2699,12 @@ container.innerHTML=
 transactions.map(function(tx){
 
 let sign="";
-
 let className="";
 
 
 if(tx.type==="in"){
 
 sign="+";
-
 className="positive";
 
 }
@@ -2607,7 +2713,6 @@ className="positive";
 else if(tx.type==="out"){
 
 sign="-";
-
 className="negative";
 
 }
@@ -2666,7 +2771,7 @@ tx.amount
    COPY CASHTAG
 ========================================== */
 
-function copyTag(){
+async function copyTag(){
 
 if(!account){
 
@@ -2679,13 +2784,11 @@ const tag=
 account.cashtag;
 
 
-if(navigator.clipboard){
+try{
 
-navigator.clipboard
-.writeText(tag)
-.catch(function(){});
+await navigator.clipboard.writeText(tag);
 
-}
+}catch(error){}
 
 
 alert(
@@ -2701,19 +2804,7 @@ tag+" copied!"
 
 function logout(){
 
-account=null;
-
-token=null;
-
-
-localStorage.removeItem(
-"nexaAccount"
-);
-
-
-localStorage.removeItem(
-"nexaToken"
-);
+clearSession();
 
 
 wallet={};
@@ -2727,9 +2818,7 @@ wallet[currency]=0;
 
 
 transactions=[];
-
 selectedRecipient=null;
-
 backendUsers=[];
 
 
@@ -2747,9 +2836,11 @@ alert(
    START NEXAPAY
 ========================================== */
 
+async function startNexaPay(){
+
 populateCurrencySelects();
 
-connectNexaPayBackend();
+await connectNexaPayBackend();
 
 
 if(account&&token){
@@ -2758,11 +2849,11 @@ loadProfile();
 
 showScreen("home");
 
-loadWallets();
+await loadWallets();
 
-loadTransactions();
+await loadTransactions();
 
-loadBackendUsers();
+await loadBackendUsers();
 
 }else{
 
@@ -2770,8 +2861,13 @@ showScreen("signup");
 
 }
 
+}
+
+
+startNexaPay();
+
 </script>
 
 </body>
 
-</html> 
+</html>
