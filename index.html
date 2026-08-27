@@ -483,7 +483,7 @@ Create NexaPay Account
 </button>
 
 <div class="notice">
-Your NexaPay account will be securely connected to the NexaPay backend.
+Your NexaPay account is securely connected to the NexaPay backend.
 </div>
 
 </div>
@@ -631,7 +631,7 @@ onclick="showScreen('convert')">
 <input
 id="recipientSearch"
 type="text"
-placeholder="$Cashtag"
+placeholder="$Cashtag or name"
 oninput="searchUsers()">
 
 <div id="searchResults"></div>
@@ -663,7 +663,7 @@ Send Money
 </div>
 
 <div class="notice">
-NexaPay transfers will be connected to the secure transfer system in the next backend update.
+Demo mode only. No real money is being transferred.
 </div>
 
 </div>
@@ -692,7 +692,7 @@ N
 </div>
 
 <p style="color:#aaa">
-Share your $Cashtag with anyone who wants to send you money.
+Share your $Cashtag with another NexaPay user who wants to send you demo money.
 </p>
 
 <br>
@@ -750,7 +750,7 @@ Convert
 </button>
 
 <div class="notice">
-Demo exchange rates only. They are not live rates.
+Demo exchange rates only. These are not live market rates.
 </div>
 
 </div>
@@ -997,6 +997,32 @@ JSON.stringify(account)
 
 
 /* ==========================================
+   AUTHORIZATION HEADERS
+========================================== */
+
+function authHeaders(){
+
+if(!account || !account.token){
+
+return {
+"Content-Type":"application/json"
+};
+
+}
+
+return {
+
+"Content-Type":"application/json",
+
+"Authorization":
+"Bearer "+account.token
+
+};
+
+}
+
+
+/* ==========================================
    BACKEND CONNECTION
 ========================================== */
 
@@ -1093,7 +1119,7 @@ const navigation=
 document.getElementById("navigation");
 
 
-if(account){
+if(account && account.token){
 
 navigation.style.display="flex";
 
@@ -1246,11 +1272,15 @@ const user=data.user;
 
 account={
 
+id:user.id,
+
 name:user.name,
 
 email:user.email,
 
-cashtag:user.cashtag
+cashtag:user.cashtag,
+
+token:data.token
 
 };
 
@@ -1383,11 +1413,15 @@ const user=data.user;
 
 account={
 
+id:user.id,
+
 name:user.name,
 
 email:user.email,
 
-cashtag:user.cashtag
+cashtag:user.cashtag,
+
+token:data.token
 
 };
 
@@ -1435,12 +1469,12 @@ button.disabled=false;
 
 
 /* ==========================================
-   LOAD WALLETS FROM DATABASE
+   LOAD WALLETS
 ========================================== */
 
 async function loadWallets(){
 
-if(!account){
+if(!account || !account.token){
 
 return;
 
@@ -1451,23 +1485,18 @@ try{
 
 const response=
 await fetch(
+
 NEXAPAY_API+
 "/api/wallets",
+
 {
 
-method:"POST",
+method:"GET",
 
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-email:account.email
-
-})
+headers:authHeaders()
 
 }
+
 );
 
 
@@ -1525,7 +1554,7 @@ error
 
 async function loadTransactions(){
 
-if(!account){
+if(!account || !account.token){
 
 return;
 
@@ -1536,23 +1565,18 @@ try{
 
 const response=
 await fetch(
+
 NEXAPAY_API+
 "/api/transactions",
+
 {
 
-method:"POST",
+method:"GET",
 
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-email:account.email
-
-})
+headers:authHeaders()
 
 }
+
 );
 
 
@@ -1598,24 +1622,46 @@ error
 
 async function loadBackendUsers(){
 
-try{
+if(!account || !account.token){
 
-const response=
-await fetch(
-NEXAPAY_API+
-"/api/users"
-);
-
-
-if(!response.ok){
+backendUsers=[];
 
 return;
 
 }
 
 
+try{
+
+const response=
+await fetch(
+
+NEXAPAY_API+
+"/api/users",
+
+{
+
+method:"GET",
+
+headers:authHeaders()
+
+}
+
+);
+
+
 const data=
 await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+data.message ||
+"Could not load users."
+);
+
+}
 
 
 backendUsers=
@@ -1866,11 +1912,141 @@ ${user.cashtag}
    SEND MONEY
 ========================================== */
 
-function sendMoney(){
+async function sendMoney(){
+
+if(!account || !account.token){
+
+alert("Please log in again.");
+
+return;
+
+}
+
+
+if(!selectedRecipient){
+
+alert("Please select a recipient.");
+
+return;
+
+}
+
+
+const amount=
+Number(
+
+document
+.getElementById("sendAmount")
+.value
+
+);
+
+
+const currency=
+document
+.getElementById("sendCurrency")
+.value;
+
+
+if(!Number.isFinite(amount)||amount<=0){
+
+alert("Enter a valid amount.");
+
+return;
+
+}
+
+
+try{
+
+const response=
+await fetch(
+
+NEXAPAY_API+
+"/api/transfers/send",
+
+{
+
+method:"POST",
+
+headers:authHeaders(),
+
+body:JSON.stringify({
+
+recipientCashtag:
+selectedRecipient.cashtag,
+
+currency:currency,
+
+amount:amount
+
+})
+
+}
+
+);
+
+
+const data=
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+data.message ||
+"Transfer failed."
+);
+
+}
+
+
+document
+.getElementById("sendAmount")
+.value="";
+
+
+selectedRecipient=null;
+
+
+document
+.getElementById("selectedRecipient")
+.innerHTML="";
+
+
+document
+.getElementById("recipientSearch")
+.value="";
+
+
+await loadWallets();
+
+await loadTransactions();
+
 
 alert(
-"🚀 The secure NexaPay transfer system is the next backend upgrade. We need to add the transfer endpoint to server.js so money moves safely between both users."
+
+"🎉 Money sent successfully to "+
+data.recipient.name+
+"!"
+
 );
+
+
+showScreen("home");
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert(
+"Transfer failed: "+
+error.message
+);
+
+}
 
 }
 
@@ -2056,12 +2232,14 @@ ${formatMoney(currency,wallet[currency])}
 
 
 /* ==========================================
-   ADD DEMO MONEY - DATABASE
+   ADD DEMO MONEY
 ========================================== */
 
 async function addDemoMoney(){
 
-if(!account){
+if(!account || !account.token){
+
+alert("Please log in again.");
 
 return;
 
@@ -2070,15 +2248,19 @@ return;
 
 const amount=
 Number(
+
 document
 .getElementById("addAmount")
 .value
+
 );
+
 
 const currency=
 document
 .getElementById("addCurrency")
 .value;
+
 
 const button=
 document
@@ -2087,9 +2269,7 @@ document
 
 if(!Number.isFinite(amount)||amount<=0){
 
-alert(
-"Enter a valid amount."
-);
+alert("Enter a valid amount.");
 
 return;
 
@@ -2106,19 +2286,17 @@ button.disabled=true;
 
 const response=
 await fetch(
+
 NEXAPAY_API+
 "/api/wallets/add-money",
+
 {
 
 method:"POST",
 
-headers:{
-"Content-Type":"application/json"
-},
+headers:authHeaders(),
 
 body:JSON.stringify({
-
-email:account.email,
 
 currency:currency,
 
@@ -2127,6 +2305,7 @@ amount:amount
 })
 
 }
+
 );
 
 
@@ -2155,8 +2334,10 @@ await loadTransactions();
 
 
 alert(
+
 formatMoney(currency,amount)+
 " added successfully."
+
 );
 
 
@@ -2191,31 +2372,42 @@ button.disabled=false;
    CONVERT CURRENCY
 ========================================== */
 
-function convertCurrency(){
+async function convertCurrency(){
+
+if(!account || !account.token){
+
+alert("Please log in again.");
+
+return;
+
+}
+
 
 const from=
 document
 .getElementById("fromCurrency")
 .value;
 
+
 const to=
 document
 .getElementById("toCurrency")
 .value;
 
+
 const amount=
 Number(
+
 document
 .getElementById("convertAmount")
 .value
+
 );
 
 
 if(!Number.isFinite(amount)||amount<=0){
 
-alert(
-"Enter a valid amount."
-);
+alert("Enter a valid amount.");
 
 return;
 
@@ -2224,18 +2416,91 @@ return;
 
 if(from===to){
 
-alert(
-"Choose different currencies."
-);
+alert("Choose different currencies.");
 
 return;
 
 }
 
 
-alert(
-"Currency conversion will be connected to the backend after the secure transfer system."
+try{
+
+const response=
+await fetch(
+
+NEXAPAY_API+
+"/api/wallets/convert",
+
+{
+
+method:"POST",
+
+headers:authHeaders(),
+
+body:JSON.stringify({
+
+from:from,
+
+to:to,
+
+amount:amount
+
+})
+
+}
+
 );
+
+
+const data=
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+data.message ||
+"Conversion failed."
+);
+
+}
+
+
+document
+.getElementById("convertAmount")
+.value="";
+
+
+await loadWallets();
+
+await loadTransactions();
+
+
+alert(
+
+"🎉 Conversion successful!\n\n"+
+formatMoney(
+to,
+data.convertedAmount
+)
+
+);
+
+
+showScreen("home");
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert(
+"Conversion failed: "+
+error.message
+);
+
+}
 
 }
 
@@ -2305,6 +2570,15 @@ else if(tx.type==="out"){
 sign="-";
 
 className="negative";
+
+}
+
+
+else if(tx.type==="convert"){
+
+sign="⇄ ";
+
+className="positive";
 
 }
 
@@ -2411,6 +2685,8 @@ transactions=[];
 
 selectedRecipient=null;
 
+backendUsers=[];
+
 
 showScreen("login");
 
@@ -2430,10 +2706,8 @@ populateCurrencySelects();
 
 connectNexaPayBackend();
 
-loadBackendUsers();
 
-
-if(account){
+if(account && account.token){
 
 loadProfile();
 
@@ -2443,7 +2717,20 @@ loadWallets();
 
 loadTransactions();
 
+loadBackendUsers();
+
 }else{
+
+/*
+Old sessions do not contain JWT tokens.
+Remove them and require a fresh login.
+*/
+
+account=null;
+
+localStorage.removeItem(
+"nexaAccount"
+);
 
 showScreen("signup");
 
