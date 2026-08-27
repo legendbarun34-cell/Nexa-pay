@@ -653,9 +653,90 @@ placeholder="0.00">
 id="sendMoneyButton"
 class="primary"
 style="width:100%"
-onclick="sendMoney()">
+onclick="reviewTransfer()">
 
-Send Money
+Review Transfer
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- REVIEW TRANSFER -->
+
+<div id="reviewTransfer" class="screen">
+
+<div class="back" onclick="showScreen('send')">
+← Back
+</div>
+
+<h1>Review Transfer</h1>
+
+<div class="subtitle">
+Please review your transfer details before sending.
+</div>
+
+<div class="form-card">
+
+<div class="section-title">
+Recipient
+</div>
+
+<div class="selected-user">
+
+<strong id="reviewRecipientName">
+NexaPay User
+</strong>
+
+<br>
+
+<span
+id="reviewRecipientTag"
+style="color:#d4af37">
+
+$NexaPay
+
+</span>
+
+</div>
+
+<div class="setting">
+
+<span>Amount</span>
+
+<strong id="reviewAmount">
+$0.00
+</strong>
+
+</div>
+
+<div class="setting">
+
+<span>Currency</span>
+
+<strong id="reviewCurrency">
+USD
+</strong>
+
+</div>
+
+<div class="notice">
+
+Please make sure the recipient and amount are correct.
+
+Transfers cannot be automatically reversed after they have been successfully processed.
+
+</div>
+
+<button
+id="confirmSendButton"
+class="primary"
+style="width:100%;margin-top:20px"
+onclick="confirmAndSendMoney()">
+
+Confirm & Send
 
 </button>
 
@@ -2049,10 +2130,10 @@ ${user.cashtag}
 
 
 /* ==========================================
-   SEND MONEY
+   REVIEW TRANSFER
 ========================================== */
 
-async function sendMoney(){
+function reviewTransfer(){
 
 if(!selectedRecipient){
 
@@ -2079,16 +2160,102 @@ document
 .value;
 
 
-const button=
-document
-.getElementById("sendMoneyButton");
-
-
 if(!Number.isFinite(amount)||amount<=0){
 
 alert(
 "Enter a valid amount."
 );
+
+return;
+
+}
+
+
+/* DISPLAY RECIPIENT */
+
+document
+.getElementById("reviewRecipientName")
+.textContent=
+selectedRecipient.name;
+
+
+document
+.getElementById("reviewRecipientTag")
+.textContent=
+selectedRecipient.cashtag;
+
+
+/* DISPLAY AMOUNT */
+
+document
+.getElementById("reviewAmount")
+.textContent=
+formatMoney(
+currency,
+amount
+);
+
+
+/* DISPLAY CURRENCY */
+
+document
+.getElementById("reviewCurrency")
+.textContent=
+currency+" - "+currencies[currency].name;
+
+
+/* OPEN REVIEW SCREEN */
+
+showScreen("reviewTransfer");
+
+}
+
+
+/* ==========================================
+   CONFIRM AND SEND MONEY
+========================================== */
+
+async function confirmAndSendMoney(){
+
+if(!selectedRecipient){
+
+alert(
+"Recipient information is missing."
+);
+
+showScreen("send");
+
+return;
+
+}
+
+
+const amount=
+Number(
+document
+.getElementById("sendAmount")
+.value
+);
+
+
+const currency=
+document
+.getElementById("sendCurrency")
+.value;
+
+
+const button=
+document
+.getElementById("confirmSendButton");
+
+
+if(!Number.isFinite(amount)||amount<=0){
+
+alert(
+"Invalid transfer amount."
+);
+
+showScreen("send");
 
 return;
 
@@ -2144,7 +2311,7 @@ data.message||
 }
 
 
-/* FIXED: BACKEND RETURNS data.transfer.recipient */
+/* GET RECIPIENT NAME */
 
 const recipientName=
 
@@ -2157,12 +2324,13 @@ data.transfer.recipient.name
 :selectedRecipient.name;
 
 
-alert(
-"🎉 Money sent successfully to "+
-recipientName+
-"!"
-);
+/* STORE DETAILS BEFORE CLEARING */
 
+const recipientTag=
+selectedRecipient.cashtag;
+
+
+/* CLEAR SEND FORM */
 
 document
 .getElementById("sendAmount")
@@ -2184,10 +2352,7 @@ document
 .innerHTML="";
 
 
-selectedRecipient=null;
-
-
-/* REFRESH EVERYTHING */
+/* REFRESH NEXAPAY DATA */
 
 await loadWallets();
 
@@ -2195,6 +2360,35 @@ await loadTransactions();
 
 await loadBackendUsers();
 
+
+/* CLEAR SELECTED RECIPIENT */
+
+selectedRecipient=null;
+
+
+/* SUCCESS MESSAGE */
+
+alert(
+
+"🎉 Transfer Successful! 💪🔥\n\n"+
+
+formatMoney(
+currency,
+amount
+)+
+
+" was successfully sent to\n\n"+
+
+recipientName+
+
+"\n"+
+
+recipientTag
+
+);
+
+
+/* RETURN HOME */
 
 showScreen("home");
 
@@ -2207,9 +2401,13 @@ console.error(
 error
 );
 
+
 alert(
+
 "Transfer failed:\n\n"+
+
 error.message
+
 );
 
 }
@@ -2217,7 +2415,7 @@ error.message
 finally{
 
 button.textContent=
-"Send Money";
+"Confirm & Send";
 
 button.disabled=false;
 
@@ -2648,8 +2846,6 @@ data.message||
 
 }
 
-
-/* FIXED: BACKEND RETURNS data.conversion.convertedAmount */
 
 const convertedAmount=
 
