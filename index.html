@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -11,422 +10,709 @@
 
 <style>
 
+/* ==========================================
+   NEXAPAY GLOBAL STYLES
+========================================== */
+
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Arial,sans-serif
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
 }
 
 body{
-background:#080808;
-color:#fff;
-min-height:100vh
+    background:#080808;
+    color:#fff;
+    min-height:100vh;
 }
 
 .app{
-max-width:480px;
-margin:auto;
-min-height:100vh;
-padding:20px 18px 95px
+    max-width:480px;
+    margin:auto;
+    min-height:100vh;
+    padding:20px 18px 110px;
 }
 
+
+/* ==========================================
+   LOGO
+========================================== */
+
 .logo{
-font-size:29px;
-font-weight:bold;
-color:#d4af37;
-margin-bottom:10px
+    font-size:29px;
+    font-weight:bold;
+    color:#d4af37;
+    margin-bottom:10px;
 }
 
 .logo-small{
-font-size:25px;
-font-weight:bold;
-color:#d4af37
+    font-size:25px;
+    font-weight:bold;
+    color:#d4af37;
 }
 
+
+/* ==========================================
+   SCREENS
+========================================== */
+
 .screen{
-display:none
+    display:none;
 }
 
 .screen.active{
-display:block
+    display:block;
 }
 
+
+/* ==========================================
+   TYPOGRAPHY
+========================================== */
+
 h1{
-font-size:28px;
-margin-bottom:10px
+    font-size:28px;
+    margin-bottom:10px;
 }
 
 .subtitle{
-color:#999;
-font-size:14px;
-line-height:1.5;
-margin-bottom:22px
+    color:#999;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:22px;
 }
 
+
+/* ==========================================
+   TOP BAR
+========================================== */
+
 .top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:28px
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .profile{
-width:42px;
-height:42px;
-border-radius:50%;
-background:#d4af37;
-color:#080808;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#d4af37;
+    color:#080808;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    cursor:pointer;
 }
 
+.refresh-button{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    padding:0;
+    background:#171717;
+    color:#d4af37;
+    border:1px solid #333;
+    font-size:19px;
+}
+
+
+/* ==========================================
+   WELCOME
+========================================== */
+
 .welcome{
-color:#999;
-font-size:14px;
-margin-bottom:6px
+    color:#999;
+    font-size:14px;
+    margin-bottom:6px;
 }
 
 .cashtag{
-color:#d4af37;
-font-size:15px;
-font-weight:bold;
-margin-bottom:20px
+    color:#d4af37;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:20px;
 }
 
+
+/* ==========================================
+   DEMO STATUS
+========================================== */
+
+.demo-status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#171717;
+    border:1px solid #3a3217;
+    color:#d4af37;
+    border-radius:12px;
+    padding:10px 13px;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+.demo-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#d4af37;
+}
+
+
+/* ==========================================
+   BALANCE
+========================================== */
+
 .balance-card{
-background:linear-gradient(135deg,#171717,#292929);
-border:1px solid #383838;
-border-radius:22px;
-padding:25px;
-margin-bottom:18px
+    background:linear-gradient(135deg,#171717,#292929);
+    border:1px solid #383838;
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:18px;
 }
 
 .balance-label{
-color:#aaa;
-font-size:14px
+    color:#aaa;
+    font-size:14px;
 }
 
 .balance{
-font-size:38px;
-font-weight:bold;
-margin:8px 0
+    font-size:38px;
+    font-weight:bold;
+    margin:8px 0;
+    word-break:break-word;
 }
 
 .currency{
-color:#d4af37;
-font-size:14px
+    color:#d4af37;
+    font-size:14px;
 }
+
+
+/* ==========================================
+   STATISTICS
+========================================== */
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:24px;
+}
+
+.stat-card{
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:16px;
+}
+
+.stat-label{
+    color:#888;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+.stat-value{
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
 
 .actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-bottom:28px
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:28px;
 }
 
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
 button{
-border:none;
-border-radius:14px;
-padding:15px;
-font-size:15px;
-font-weight:bold;
-cursor:pointer
+    border:none;
+    border-radius:14px;
+    padding:15px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:active{
+    transform:scale(.98);
 }
 
 button:disabled{
-opacity:.6;
-cursor:not-allowed
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 .primary{
-background:#d4af37;
-color:#080808
+    background:#d4af37;
+    color:#080808;
 }
 
 .secondary{
-background:#1b1b1b;
-color:#fff;
-border:1px solid #333
+    background:#1b1b1b;
+    color:#fff;
+    border:1px solid #333;
 }
 
+
+/* ==========================================
+   FORMS
+========================================== */
+
 .form-card{
-background:#151515;
-border:1px solid #292929;
-border-radius:18px;
-padding:20px;
-margin-top:15px
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:20px;
+    margin-top:15px;
 }
 
 label{
-display:block;
-color:#aaa;
-font-size:13px;
-margin-bottom:7px
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:7px;
 }
 
 input,
 select{
-width:100%;
-padding:15px;
-background:#0d0d0d;
-border:1px solid #333;
-border-radius:12px;
-color:#fff;
-margin-bottom:15px;
-font-size:15px;
-outline:none
+    width:100%;
+    padding:15px;
+    background:#0d0d0d;
+    border:1px solid #333;
+    border-radius:12px;
+    color:#fff;
+    margin-bottom:15px;
+    font-size:15px;
+    outline:none;
 }
 
 input:focus,
 select:focus{
-border-color:#d4af37
+    border-color:#d4af37;
 }
+
+
+/* ==========================================
+   PASSWORD
+========================================== */
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    padding-right:55px;
+}
+
+.password-toggle{
+    position:absolute;
+    right:7px;
+    top:4px;
+    background:transparent;
+    color:#d4af37;
+    padding:10px;
+    font-size:13px;
+    border:none;
+}
+
+
+/* ==========================================
+   SECTION
+========================================== */
 
 .section-title{
-font-size:19px;
-margin-bottom:14px
+    font-size:19px;
+    margin-bottom:14px;
 }
 
+
+/* ==========================================
+   WALLETS
+========================================== */
+
 .wallet{
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:#151515;
-padding:17px;
-border-radius:15px;
-margin-bottom:10px;
-border:1px solid #252525
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#151515;
+    padding:17px;
+    border-radius:15px;
+    margin-bottom:10px;
+    border:1px solid #252525;
+    gap:12px;
 }
 
 .currency-name{
-font-weight:bold
+    font-weight:bold;
 }
 
 .currency-code{
-color:#888;
-font-size:12px;
-margin-top:4px
+    color:#888;
+    font-size:12px;
+    margin-top:4px;
 }
 
 .amount{
-font-weight:bold
+    font-weight:bold;
+    text-align:right;
 }
 
+
+/* ==========================================
+   RECEIVE
+========================================== */
+
 .receive-box{
-text-align:center;
-background:#151515;
-border:1px solid #333;
-border-radius:20px;
-padding:28px 20px;
-margin-top:15px
+    text-align:center;
+    background:#151515;
+    border:1px solid #333;
+    border-radius:20px;
+    padding:28px 20px;
+    margin-top:15px;
 }
 
 .receive-tag{
-font-size:28px;
-font-weight:bold;
-color:#d4af37;
-margin:15px 0
+    font-size:28px;
+    font-weight:bold;
+    color:#d4af37;
+    margin:15px 0;
 }
 
 .qr{
-width:150px;
-height:150px;
-margin:20px auto;
-background:#fff;
-color:#111;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:55px;
-border-radius:12px
+    width:150px;
+    height:150px;
+    margin:20px auto;
+    background:#fff;
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    border-radius:12px;
 }
 
+
+/* ==========================================
+   TRANSACTIONS
+========================================== */
+
 .transaction{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#151515;
-border:1px solid #252525;
-border-radius:15px;
-padding:16px;
-margin-bottom:10px;
-gap:10px
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#151515;
+    border:1px solid #252525;
+    border-radius:15px;
+    padding:16px;
+    margin-bottom:10px;
+    gap:10px;
 }
 
 .transaction small{
-color:#888;
-display:block;
-margin-top:5px
+    color:#888;
+    display:block;
+    margin-top:5px;
 }
 
 .positive{
-color:#4ade80
+    color:#4ade80;
 }
 
 .negative{
-color:#ff6b6b
+    color:#ff6b6b;
 }
 
+
+/* ==========================================
+   PROFILE
+========================================== */
+
 .profile-card{
-background:#151515;
-border-radius:18px;
-padding:22px;
-border:1px solid #292929
+    background:#151515;
+    border-radius:18px;
+    padding:22px;
+    border:1px solid #292929;
 }
 
 .profile-big{
-width:70px;
-height:70px;
-border-radius:50%;
-background:#d4af37;
-color:#080808;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-font-weight:bold;
-margin-bottom:15px
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:#d4af37;
+    color:#080808;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:15px;
 }
 
 .setting{
-display:flex;
-justify-content:space-between;
-padding:17px 0;
-border-bottom:1px solid #292929
+    display:flex;
+    justify-content:space-between;
+    padding:17px 0;
+    border-bottom:1px solid #292929;
 }
 
 .setting:last-child{
-border-bottom:none
+    border-bottom:none;
 }
 
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
 .bottom{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-max-width:480px;
-margin:auto;
-background:#101010;
-border-top:1px solid #292929;
-display:flex;
-justify-content:space-around;
-padding:12px 4px;
-z-index:10
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    max-width:480px;
+    margin:auto;
+    background:#101010;
+    border-top:1px solid #292929;
+    display:flex;
+    justify-content:space-around;
+    padding:12px 4px;
+    z-index:10;
 }
 
 .nav-item{
-color:#777;
-text-align:center;
-font-size:11px;
-cursor:pointer;
-min-width:55px
+    color:#777;
+    text-align:center;
+    font-size:11px;
+    cursor:pointer;
+    min-width:55px;
 }
 
 .nav-item.active{
-color:#d4af37
+    color:#d4af37;
 }
 
 .nav-icon{
-font-size:20px;
-margin-bottom:4px
+    font-size:20px;
+    margin-bottom:4px;
 }
+
+
+/* ==========================================
+   BACK
+========================================== */
 
 .back{
-color:#d4af37;
-margin-bottom:20px;
-cursor:pointer;
-font-weight:bold
+    color:#d4af37;
+    margin-bottom:20px;
+    cursor:pointer;
+    font-weight:bold;
 }
+
+
+/* ==========================================
+   NOTICE
+========================================== */
 
 .notice{
-background:#171717;
-border:1px solid #333;
-border-radius:12px;
-padding:12px;
-color:#999;
-font-size:12px;
-line-height:1.5;
-margin-top:15px
+    background:#171717;
+    border:1px solid #333;
+    border-radius:12px;
+    padding:12px;
+    color:#999;
+    font-size:12px;
+    line-height:1.5;
+    margin-top:15px;
 }
+
+
+/* ==========================================
+   EMPTY
+========================================== */
 
 .empty{
-color:#777;
-text-align:center;
-padding:30px 10px;
-background:#151515;
-border-radius:15px
+    color:#777;
+    text-align:center;
+    padding:30px 10px;
+    background:#151515;
+    border-radius:15px;
 }
 
+
+/* ==========================================
+   USERS
+========================================== */
+
 .user-result{
-background:#151515;
-border:1px solid #333;
-border-radius:15px;
-padding:16px;
-margin-top:10px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
+    background:#151515;
+    border:1px solid #333;
+    border-radius:15px;
+    padding:16px;
+    margin-top:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
 }
 
 .user-left{
-display:flex;
-align-items:center;
-gap:12px
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
 }
 
 .user-avatar{
-width:45px;
-height:45px;
-border-radius:50%;
-background:#d4af37;
-color:#080808;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#d4af37;
+    color:#080808;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    flex-shrink:0;
 }
 
 .user-name{
-font-weight:bold
+    font-weight:bold;
 }
 
 .user-tag{
-color:#d4af37;
-font-size:13px;
-margin-top:4px
+    color:#d4af37;
+    font-size:13px;
+    margin-top:4px;
 }
 
 .selected-user{
-background:#171717;
-border:1px solid #d4af37;
-border-radius:15px;
-padding:16px;
-margin:15px 0
+    background:#171717;
+    border:1px solid #d4af37;
+    border-radius:15px;
+    padding:16px;
+    margin:15px 0;
 }
 
 .success{
-color:#4ade80;
-font-size:13px;
-margin-top:10px
+    color:#4ade80;
+    font-size:13px;
+    margin-top:10px;
 }
 
+
+/* ==========================================
+   BACKEND STATUS
+========================================== */
+
 .backend-status{
-font-size:11px;
-color:#999;
-text-align:center;
-margin-bottom:20px
+    font-size:11px;
+    color:#999;
+    text-align:center;
+    margin-bottom:20px;
 }
 
 .backend-status.connected{
-color:#4ade80
+    color:#4ade80;
 }
 
 .backend-status.error{
-color:#ff6b6b
+    color:#ff6b6b;
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading{
+    text-align:center;
+    color:#999;
+    padding:20px;
+}
+
+
+/* ==========================================
+   NOTIFICATIONS
+========================================== */
+
+#notificationContainer{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:calc(100% - 36px);
+    max-width:440px;
+    z-index:100;
+    pointer-events:none;
+}
+
+.notification{
+    background:#181818;
+    border:1px solid #333;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    animation:slideDown .3s ease;
+    pointer-events:auto;
+}
+
+.notification.success{
+    border-color:#4ade80;
+}
+
+.notification.error{
+    border-color:#ff6b6b;
+}
+
+.notification.info{
+    border-color:#d4af37;
+}
+
+.notification-title{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.notification-message{
+    color:#aaa;
+    font-size:13px;
+    line-height:1.4;
+}
+
+@keyframes slideDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
 }
 
 </style>
@@ -435,10 +721,14 @@ color:#ff6b6b
 
 <body>
 
+<div id="notificationContainer"></div>
+
 <div class="app">
 
 
-<!-- SIGNUP -->
+<!-- ==========================================
+     SIGNUP
+========================================== -->
 
 <div id="signup" class="screen active">
 
@@ -457,16 +747,40 @@ Create your NexaPay account and choose your unique $Cashtag.
 <div class="form-card">
 
 <label>Your name</label>
+
 <input id="signupName" type="text" placeholder="Your name">
 
+
 <label>Email</label>
+
 <input id="signupEmail" type="email" placeholder="example@email.com">
 
+
 <label>Choose your $Cashtag</label>
+
 <input id="signupTag" type="text" placeholder="$YourName">
 
+
 <label>Password</label>
-<input id="signupPassword" type="password" placeholder="Create your password">
+
+<div class="password-box">
+
+<input
+id="signupPassword"
+type="password"
+placeholder="Create your password">
+
+<button
+type="button"
+class="password-toggle"
+onclick="togglePassword('signupPassword',this)">
+
+Show
+
+</button>
+
+</div>
+
 
 <button
 id="signupButton"
@@ -478,11 +792,16 @@ Create NexaPay Account
 
 </button>
 
+
 <div class="notice">
-Your NexaPay account will be securely connected to the NexaPay backend.
+
+NexaPay is currently operating in demonstration mode.
+No real-world money should be deposited or transferred through this version.
+
 </div>
 
 </div>
+
 
 <div
 style="color:#d4af37;text-align:center;margin-top:18px;font-size:14px;cursor:pointer"
@@ -495,7 +814,9 @@ Already have an account? Log in
 </div>
 
 
-<!-- LOGIN -->
+<!-- ==========================================
+     LOGIN
+========================================== -->
 
 <div id="login" class="screen">
 
@@ -512,10 +833,30 @@ Log in to your NexaPay account.
 <div class="form-card">
 
 <label>Email</label>
+
 <input id="loginEmail" type="email" placeholder="Your email">
 
+
 <label>Password</label>
-<input id="loginPassword" type="password" placeholder="Your password">
+
+<div class="password-box">
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Your password">
+
+<button
+type="button"
+class="password-toggle"
+onclick="togglePassword('loginPassword',this)">
+
+Show
+
+</button>
+
+</div>
+
 
 <button
 id="loginButton"
@@ -529,6 +870,7 @@ Log In
 
 </div>
 
+
 <div
 style="color:#d4af37;text-align:center;margin-top:18px;font-size:14px;cursor:pointer"
 onclick="showScreen('signup')">
@@ -540,7 +882,9 @@ Create a new account
 </div>
 
 
-<!-- HOME -->
+<!-- ==========================================
+     HOME
+========================================== -->
 
 <div id="home" class="screen">
 
@@ -548,23 +892,54 @@ Create a new account
 
 <div class="logo-small">NexaPay</div>
 
-<div class="profile" id="profileInitial">
+<div class="top-actions">
+
+<button
+class="refresh-button"
+onclick="refreshDashboard()"
+title="Refresh account">
+
+↻
+
+</button>
+
+<div
+class="profile"
+id="profileInitial"
+onclick="showScreen('profileScreen')">
+
 N
+
 </div>
 
 </div>
+
+</div>
+
+
+<div class="demo-status">
+
+<div class="demo-dot"></div>
+
+DEMO MODE — No real money is being processed
+
+</div>
+
 
 <div class="welcome">
 Welcome back
 </div>
 
+
 <h1 id="homeName">
 NexaPay User
 </h1>
 
+
 <div class="cashtag" id="homeTag">
 $NexaPay
 </div>
+
 
 <div class="balance-card">
 
@@ -582,6 +957,39 @@ Multi-currency wallet
 
 </div>
 
+
+<!-- STATISTICS -->
+
+<div class="stats">
+
+<div class="stat-card">
+
+<div class="stat-label">
+Active Wallets
+</div>
+
+<div class="stat-value" id="walletCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-label">
+Transactions
+</div>
+
+<div class="stat-value" id="transactionCount">
+0
+</div>
+
+</div>
+
+</div>
+
+
 <div class="actions">
 
 <button class="primary" onclick="showScreen('send')">
@@ -594,11 +1002,13 @@ Receive
 
 </div>
 
+
 <div class="section-title">
 Your wallets
 </div>
 
 <div id="walletList"></div>
+
 
 <button
 class="secondary"
@@ -612,7 +1022,9 @@ onclick="showScreen('convert')">
 </div>
 
 
-<!-- SEND -->
+<!-- ==========================================
+     SEND
+========================================== -->
 
 <div id="send" class="screen">
 
@@ -622,6 +1034,10 @@ onclick="showScreen('convert')">
 
 <h1>Send Money</h1>
 
+<div class="subtitle">
+Find another NexaPay user using their name or $Cashtag.
+</div>
+
 <div class="form-card">
 
 <label>Find recipient</label>
@@ -629,12 +1045,14 @@ onclick="showScreen('convert')">
 <input
 id="recipientSearch"
 type="text"
-placeholder="$Cashtag"
+placeholder="$Cashtag or name"
 oninput="searchUsers()">
+
 
 <div id="searchResults"></div>
 
 <div id="selectedRecipient"></div>
+
 
 <label>Amount</label>
 
@@ -645,9 +1063,11 @@ min="0"
 step="0.00000001"
 placeholder="0.00">
 
+
 <label>Currency</label>
 
 <select id="sendCurrency"></select>
+
 
 <button
 id="sendMoneyButton"
@@ -664,7 +1084,9 @@ Review Transfer
 </div>
 
 
-<!-- REVIEW TRANSFER -->
+<!-- ==========================================
+     REVIEW TRANSFER
+========================================== -->
 
 <div id="reviewTransfer" class="screen">
 
@@ -684,6 +1106,7 @@ Please review your transfer details before sending.
 Recipient
 </div>
 
+
 <div class="selected-user">
 
 <strong id="reviewRecipientName">
@@ -702,6 +1125,7 @@ $NexaPay
 
 </div>
 
+
 <div class="setting">
 
 <span>Amount</span>
@@ -711,6 +1135,7 @@ $0.00
 </strong>
 
 </div>
+
 
 <div class="setting">
 
@@ -722,13 +1147,13 @@ USD
 
 </div>
 
+
 <div class="notice">
 
-Please make sure the recipient and amount are correct.
-
-Transfers cannot be automatically reversed after they have been successfully processed.
+Please make sure the recipient and amount are correct before confirming.
 
 </div>
+
 
 <button
 id="confirmSendButton"
@@ -745,7 +1170,9 @@ Confirm & Send
 </div>
 
 
-<!-- RECEIVE -->
+<!-- ==========================================
+     RECEIVE
+========================================== -->
 
 <div id="receive" class="screen">
 
@@ -768,7 +1195,7 @@ N
 </div>
 
 <p style="color:#aaa">
-Share your $Cashtag with anyone who wants to send you money.
+Share your $Cashtag with another NexaPay user.
 </p>
 
 <br>
@@ -787,7 +1214,9 @@ Copy $Cashtag
 </div>
 
 
-<!-- CONVERT -->
+<!-- ==========================================
+     CONVERT
+========================================== -->
 
 <div id="convert" class="screen">
 
@@ -800,7 +1229,9 @@ Copy $Cashtag
 <div class="form-card">
 
 <label>From</label>
+
 <select id="fromCurrency"></select>
+
 
 <label>Amount</label>
 
@@ -811,8 +1242,11 @@ min="0"
 step="0.00000001"
 placeholder="0.00">
 
+
 <label>To</label>
+
 <select id="toCurrency"></select>
+
 
 <button
 id="convertButton"
@@ -824,31 +1258,56 @@ Convert
 
 </button>
 
+
 <div class="notice">
-Demo exchange rates only. They are not live rates.
-</div>
+
+Demo exchange rates only. These are not live market exchange rates.
 
 </div>
 
 </div>
 
+</div>
 
-<!-- ACTIVITY -->
+
+<!-- ==========================================
+     ACTIVITY
+========================================== -->
 
 <div id="activity" class="screen">
 
-<h1>Activity</h1>
+<div class="top">
+
+<h1 style="margin-bottom:0">
+Activity
+</h1>
+
+<button
+class="refresh-button"
+onclick="refreshActivity()">
+
+↻
+
+</button>
+
+</div>
 
 <div id="transactions"></div>
 
 </div>
 
 
-<!-- ADD MONEY -->
+<!-- ==========================================
+     ADD MONEY
+========================================== -->
 
 <div id="add" class="screen">
 
 <h1>Add Money</h1>
+
+<div class="subtitle">
+Add demonstration funds to test your NexaPay wallet.
+</div>
 
 <div class="form-card">
 
@@ -861,8 +1320,11 @@ min="0"
 step="0.00000001"
 placeholder="0.00">
 
+
 <label>Currency</label>
+
 <select id="addCurrency"></select>
+
 
 <button
 id="addMoneyButton"
@@ -874,16 +1336,21 @@ Add Demo Money
 
 </button>
 
+
 <div class="notice">
-Demo mode — no real money is being moved.
-</div>
+
+⚠ DEMO MODE — No real money is being moved.
 
 </div>
 
 </div>
 
+</div>
 
-<!-- PROFILE -->
+
+<!-- ==========================================
+     PROFILE
+========================================== -->
 
 <div id="profileScreen" class="screen">
 
@@ -895,35 +1362,63 @@ Demo mode — no real money is being moved.
 N
 </div>
 
+
 <h2 id="profileName">
 NexaPay User
 </h2>
+
 
 <div class="cashtag" id="profileTag">
 $NexaPay
 </div>
 
-<div class="setting">
-<span>Account</span>
-<span>›</span>
-</div>
 
 <div class="setting">
-<span>Security</span>
-<span>›</span>
+
+<span>Account Status</span>
+
+<span style="color:#4ade80">
+Active
+</span>
+
 </div>
 
-<div class="setting">
-<span>Notifications</span>
-<span>›</span>
-</div>
 
 <div class="setting">
+
+<span>Environment</span>
+
+<span style="color:#d4af37">
+Demo
+</span>
+
+</div>
+
+
+<div class="setting">
+
 <span>Supported currencies</span>
-<span>7</span>
+
+<span id="supportedCurrencies">
+7
+</span>
+
 </div>
+
+
+<div class="setting">
+
+<span>Backend</span>
+
+<span id="profileBackendStatus">
+Checking...
+</span>
+
+</div>
+
 
 <br>
+
 
 <button
 class="secondary"
@@ -939,48 +1434,59 @@ Log Out
 </div>
 
 
-<!-- NAVIGATION -->
+<!-- ==========================================
+     NAVIGATION
+========================================== -->
 
 <div
 id="navigation"
 class="bottom"
 style="display:none">
 
+
 <div
 class="nav-item active"
 onclick="showScreen('home',this)">
 
 <div class="nav-icon">⌂</div>
+
 Home
 
 </div>
+
 
 <div
 class="nav-item"
 onclick="openActivity(this)">
 
 <div class="nav-icon">⇄</div>
+
 Activity
 
 </div>
+
 
 <div
 class="nav-item"
 onclick="showScreen('add',this)">
 
 <div class="nav-icon">＋</div>
-Add Money
+
+Add
 
 </div>
+
 
 <div
 class="nav-item"
 onclick="showScreen('profileScreen',this)">
 
 <div class="nav-icon">●</div>
+
 Profile
 
 </div>
+
 
 </div>
 
@@ -1033,9 +1539,7 @@ account=JSON.parse(
 localStorage.getItem("nexaAccount")
 );
 
-token=localStorage.getItem(
-"nexaToken"
-);
+token=localStorage.getItem("nexaToken");
 
 }catch(error){
 
@@ -1044,6 +1548,10 @@ token=null;
 
 }
 
+
+/* ==========================================
+   WALLET
+========================================== */
 
 let wallet={};
 
@@ -1057,6 +1565,76 @@ wallet[currency]=0;
 let transactions=[];
 let selectedRecipient=null;
 let backendUsers=[];
+
+
+/* ==========================================
+   NOTIFICATIONS
+========================================== */
+
+function showNotification(title,message,type="info"){
+
+const container=
+document.getElementById("notificationContainer");
+
+const notification=
+document.createElement("div");
+
+notification.className=
+"notification "+type;
+
+notification.innerHTML=
+`
+<div class="notification-title">
+${title}
+</div>
+
+<div class="notification-message">
+${message}
+</div>
+`;
+
+container.appendChild(notification);
+
+
+setTimeout(function(){
+
+notification.style.opacity="0";
+
+setTimeout(function(){
+
+notification.remove();
+
+},300);
+
+},4000);
+
+}
+
+
+/* ==========================================
+   PASSWORD TOGGLE
+========================================== */
+
+function togglePassword(inputId,button){
+
+const input=
+document.getElementById(inputId);
+
+if(input.type==="password"){
+
+input.type="text";
+
+button.textContent="Hide";
+
+}else{
+
+input.type="password";
+
+button.textContent="Show";
+
+}
+
+}
 
 
 /* ==========================================
@@ -1117,6 +1695,7 @@ async function apiRequest(endpoint,options={}){
 const controller=
 new AbortController();
 
+
 const timeout=
 setTimeout(function(){
 
@@ -1129,11 +1708,14 @@ try{
 
 const response=
 await fetch(
+
 NEXAPAY_API+endpoint,
+
 {
 ...options,
 signal:controller.signal
 }
+
 );
 
 
@@ -1159,8 +1741,10 @@ message:text||
 
 
 return{
+
 response:response,
 data:data
+
 };
 
 }
@@ -1170,6 +1754,25 @@ finally{
 clearTimeout(timeout);
 
 }
+
+}
+
+
+/* ==========================================
+   HANDLE SESSION EXPIRY
+========================================== */
+
+function handleUnauthorized(){
+
+clearSession();
+
+showNotification(
+"Session expired",
+"Please log in again.",
+"error"
+);
+
+showScreen("login");
 
 }
 
@@ -1185,6 +1788,9 @@ document.getElementById("backendStatus");
 
 const loginStatus=
 document.getElementById("loginStatus");
+
+const profileStatus=
+document.getElementById("profileBackendStatus");
 
 
 try{
@@ -1233,6 +1839,17 @@ loginStatus.className=
 }
 
 
+if(profileStatus){
+
+profileStatus.textContent=
+"Connected";
+
+profileStatus.style.color=
+"#4ade80";
+
+}
+
+
 return true;
 
 }
@@ -1240,7 +1857,7 @@ return true;
 
 throw new Error(
 result.data.message||
-"Backend database unavailable."
+"Backend unavailable."
 );
 
 }
@@ -1268,6 +1885,17 @@ loginStatus.textContent=
 
 loginStatus.className=
 "backend-status error";
+
+}
+
+
+if(profileStatus){
+
+profileStatus.textContent=
+"Unavailable";
+
+profileStatus.style.color=
+"#ff6b6b";
 
 }
 
@@ -1353,6 +1981,7 @@ document
 .value
 .trim();
 
+
 const email=
 document
 .getElementById("signupEmail")
@@ -1360,16 +1989,19 @@ document
 .trim()
 .toLowerCase();
 
+
 let cashtag=
 document
 .getElementById("signupTag")
 .value
 .trim();
 
+
 const password=
 document
 .getElementById("signupPassword")
 .value;
+
 
 const button=
 document
@@ -1378,7 +2010,11 @@ document
 
 if(!name||!email||!cashtag||!password){
 
-alert("Please complete all fields.");
+showNotification(
+"Missing information",
+"Please complete all fields.",
+"error"
+);
 
 return;
 
@@ -1387,8 +2023,10 @@ return;
 
 if(password.length<6){
 
-alert(
-"Password must be at least 6 characters."
+showNotification(
+"Password too short",
+"Password must be at least 6 characters.",
+"error"
 );
 
 return;
@@ -1405,7 +2043,11 @@ cashtag="$"+cashtag;
 
 if(cashtag.length<3){
 
-alert("Your $Cashtag is too short.");
+showNotification(
+"Invalid $Cashtag",
+"Your $Cashtag is too short.",
+"error"
+);
 
 return;
 
@@ -1414,7 +2056,11 @@ return;
 
 if(cashtag.includes(" ")){
 
-alert("$Cashtag cannot contain spaces.");
+showNotification(
+"Invalid $Cashtag",
+"$Cashtag cannot contain spaces.",
+"error"
+);
 
 return;
 
@@ -1431,7 +2077,9 @@ button.disabled=true;
 
 const result=
 await apiRequest(
+
 "/api/users/register",
+
 {
 
 method:"POST",
@@ -1450,24 +2098,23 @@ password:password
 })
 
 }
+
 );
 
 
-const response=result.response;
-const data=result.data;
-
-
-if(!response.ok){
+if(!result.response.ok){
 
 throw new Error(
-data.message||
+
+result.data.message||
 "Unable to create account."
+
 );
 
 }
 
 
-if(!data.user||!data.token){
+if(!result.data.user||!result.data.token){
 
 throw new Error(
 "The server did not return a valid login session."
@@ -1478,14 +2125,14 @@ throw new Error(
 
 account={
 
-name:data.user.name,
-email:data.user.email,
-cashtag:data.user.cashtag
+name:result.data.user.name,
+email:result.data.user.email,
+cashtag:result.data.user.cashtag
 
 };
 
 
-token=data.token;
+token=result.data.token;
 
 
 saveAccount();
@@ -1493,15 +2140,15 @@ saveAccount();
 
 loadProfile();
 
-await loadWallets();
-
-await loadTransactions();
+await refreshDashboardData();
 
 await loadBackendUsers();
 
 
-alert(
-"🎉 Your NexaPay account has been created successfully!"
+showNotification(
+"Account created 🎉",
+"Welcome to NexaPay!",
+"success"
 );
 
 
@@ -1513,9 +2160,10 @@ catch(error){
 
 console.error(error);
 
-alert(
-"Account creation failed:\n\n"+
-error.message
+showNotification(
+"Account creation failed",
+error.message,
+"error"
 );
 
 }
@@ -1545,10 +2193,12 @@ document
 .trim()
 .toLowerCase();
 
+
 const password=
 document
 .getElementById("loginPassword")
 .value;
+
 
 const button=
 document
@@ -1557,8 +2207,10 @@ document
 
 if(!email||!password){
 
-alert(
-"Please enter your email and password."
+showNotification(
+"Missing information",
+"Please enter your email and password.",
+"error"
 );
 
 return;
@@ -1576,7 +2228,9 @@ button.disabled=true;
 
 const result=
 await apiRequest(
+
 "/api/login",
+
 {
 
 method:"POST",
@@ -1593,36 +2247,26 @@ password:password
 })
 
 }
+
 );
 
 
-const response=result.response;
-const data=result.data;
-
-
-if(!response.ok){
+if(!result.response.ok){
 
 throw new Error(
-data.message||
+
+result.data.message||
 "Incorrect email or password."
+
 );
 
 }
 
 
-if(!data.user){
+if(!result.data.user||!result.data.token){
 
 throw new Error(
-"User information was not received."
-);
-
-}
-
-
-if(!data.token){
-
-throw new Error(
-"Login token was not received from the server."
+"Invalid login response from server."
 );
 
 }
@@ -1630,14 +2274,14 @@ throw new Error(
 
 account={
 
-name:data.user.name,
-email:data.user.email,
-cashtag:data.user.cashtag
+name:result.data.user.name,
+email:result.data.user.email,
+cashtag:result.data.user.cashtag
 
 };
 
 
-token=data.token;
+token=result.data.token;
 
 
 saveAccount();
@@ -1645,15 +2289,15 @@ saveAccount();
 
 loadProfile();
 
-await loadWallets();
-
-await loadTransactions();
+await refreshDashboardData();
 
 await loadBackendUsers();
 
 
-alert(
-"Welcome back to NexaPay! 💪"
+showNotification(
+"Welcome back 💪",
+"Successfully logged into NexaPay.",
+"success"
 );
 
 
@@ -1665,9 +2309,10 @@ catch(error){
 
 console.error(error);
 
-alert(
-"Login failed:\n\n"+
-error.message
+showNotification(
+"Login failed",
+error.message,
+"error"
 );
 
 }
@@ -1701,7 +2346,9 @@ try{
 
 const result=
 await apiRequest(
+
 "/api/wallets",
+
 {
 
 method:"GET",
@@ -1709,33 +2356,26 @@ method:"GET",
 headers:authHeaders()
 
 }
+
 );
 
 
-const response=result.response;
-const data=result.data;
+if(result.response.status===401){
 
-
-if(response.status===401){
-
-clearSession();
-
-alert(
-"Your session has expired. Please log in again."
-);
-
-showScreen("login");
+handleUnauthorized();
 
 return;
 
 }
 
 
-if(!response.ok){
+if(!result.response.ok){
 
 throw new Error(
-data.message||
+
+result.data.message||
 "Could not load wallets."
+
 );
 
 }
@@ -1749,7 +2389,7 @@ wallet[currency]=0;
 });
 
 
-(data.wallets||[])
+(result.data.wallets||[])
 .forEach(function(item){
 
 wallet[item.currency]=
@@ -1761,6 +2401,8 @@ Number(item.balance)||0;
 renderWallets();
 
 updateTotal();
+
+updateStatistics();
 
 }
 
@@ -1793,7 +2435,9 @@ try{
 
 const result=
 await apiRequest(
+
 "/api/transactions",
+
 {
 
 method:"GET",
@@ -1801,30 +2445,40 @@ method:"GET",
 headers:authHeaders()
 
 }
+
 );
 
 
-const response=result.response;
-const data=result.data;
+if(result.response.status===401){
+
+handleUnauthorized();
+
+return;
+
+}
 
 
-if(!response.ok){
+if(!result.response.ok){
 
 throw new Error(
-data.message||
+
+result.data.message||
 "Could not load transactions."
+
 );
 
 }
 
 
 transactions=
-Array.isArray(data.transactions)
-?data.transactions
+Array.isArray(result.data.transactions)
+?result.data.transactions
 :[];
 
 
 renderTransactions();
+
+updateStatistics();
 
 }
 
@@ -1857,7 +2511,9 @@ try{
 
 const result=
 await apiRequest(
+
 "/api/users",
+
 {
 
 method:"GET",
@@ -1865,7 +2521,17 @@ method:"GET",
 headers:authHeaders()
 
 }
+
 );
+
+
+if(result.response.status===401){
+
+handleUnauthorized();
+
+return;
+
+}
 
 
 if(!result.response.ok){
@@ -1889,6 +2555,70 @@ console.error(error);
 backendUsers=[];
 
 }
+
+}
+
+
+/* ==========================================
+   REFRESH DASHBOARD DATA
+========================================== */
+
+async function refreshDashboardData(){
+
+await Promise.all([
+
+loadWallets(),
+loadTransactions()
+
+]);
+
+}
+
+
+/* ==========================================
+   REFRESH DASHBOARD
+========================================== */
+
+async function refreshDashboard(){
+
+showNotification(
+"Refreshing",
+"Updating your NexaPay account...",
+"info"
+);
+
+await refreshDashboardData();
+
+await connectNexaPayBackend();
+
+showNotification(
+"Updated",
+"Your account information is up to date.",
+"success"
+);
+
+}
+
+
+/* ==========================================
+   REFRESH ACTIVITY
+========================================== */
+
+async function refreshActivity(){
+
+showNotification(
+"Refreshing",
+"Updating your activity...",
+"info"
+);
+
+await loadTransactions();
+
+showNotification(
+"Updated",
+"Your activity is up to date.",
+"success"
+);
 
 }
 
@@ -1953,6 +2683,12 @@ document
 .textContent=
 initial;
 
+
+document
+.getElementById("supportedCurrencies")
+.textContent=
+Object.keys(currencies).length;
+
 }
 
 
@@ -1960,7 +2696,16 @@ initial;
    SEARCH USERS
 ========================================== */
 
-async function searchUsers(){
+let searchTimeout=null;
+
+
+function searchUsers(){
+
+clearTimeout(searchTimeout);
+
+
+searchTimeout=
+setTimeout(async function(){
 
 const input=
 document
@@ -1968,6 +2713,7 @@ document
 .value
 .trim()
 .toLowerCase();
+
 
 const results=
 document
@@ -1991,15 +2737,21 @@ return;
 }
 
 
+results.innerHTML=
+'<div class="loading">Searching NexaPay users...</div>';
+
+
 await loadBackendUsers();
 
 
 const users=
-backendUsers.filter(function(user){
+backendUsers
+.filter(function(user){
 
 const name=
 String(user.name||"")
 .toLowerCase();
+
 
 const tag=
 String(user.cashtag||"")
@@ -2013,12 +2765,15 @@ tag.includes(input)
 
 );
 
-}).filter(function(user){
+})
+.filter(function(user){
 
 return(
+
 String(user.cashtag).toLowerCase()!==
 
 String(account.cashtag).toLowerCase()
+
 );
 
 });
@@ -2038,44 +2793,64 @@ results.innerHTML=
 users.map(function(user){
 
 return `
+
 <div class="user-result">
 
 <div class="user-left">
 
 <div class="user-avatar">
+
 ${String(user.name).charAt(0).toUpperCase()}
+
 </div>
+
 
 <div>
 
 <div class="user-name">
+
 ${user.name}
+
 </div>
+
 
 <div class="user-tag">
+
 ${user.cashtag}
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 
 <button
+
 class="primary"
+
 style="width:auto;padding:10px 14px"
-onclick="selectRecipient('${user.cashtag}')">
+
+onclick="selectRecipient('${String(user.cashtag).replace(/'/g,"\\'")}')">
 
 Select
 
 </button>
 
 </div>
+
 `;
 
 }).join("");
 
+},300);
+
 }
 
+
+/* ==========================================
+   SELECT RECIPIENT
+========================================== */
 
 function selectRecipient(cashtag){
 
@@ -2083,8 +2858,11 @@ const user=
 backendUsers.find(function(item){
 
 return(
+
 String(item.cashtag).toLowerCase()===
+
 String(cashtag).toLowerCase()
+
 );
 
 });
@@ -2107,8 +2885,13 @@ document
 
 document
 .getElementById("selectedRecipient")
+innerHTML="";
+
+document
+.getElementById("selectedRecipient")
 .innerHTML=
 `
+
 <div class="selected-user">
 
 <strong>${user.name}</strong>
@@ -2116,14 +2899,20 @@ document
 <br>
 
 <span style="color:#d4af37">
+
 ${user.cashtag}
+
 </span>
 
+
 <div class="success">
+
 ✓ Recipient selected
+
 </div>
 
 </div>
+
 `;
 
 }
@@ -2137,8 +2926,10 @@ function reviewTransfer(){
 
 if(!selectedRecipient){
 
-alert(
-"Please select a recipient first."
+showNotification(
+"Recipient required",
+"Please select a recipient first.",
+"error"
 );
 
 return;
@@ -2162,16 +2953,16 @@ document
 
 if(!Number.isFinite(amount)||amount<=0){
 
-alert(
-"Enter a valid amount."
+showNotification(
+"Invalid amount",
+"Enter a valid amount.",
+"error"
 );
 
 return;
 
 }
 
-
-/* DISPLAY RECIPIENT */
 
 document
 .getElementById("reviewRecipientName")
@@ -2185,18 +2976,11 @@ document
 selectedRecipient.cashtag;
 
 
-/* DISPLAY AMOUNT */
-
 document
 .getElementById("reviewAmount")
 .textContent=
-formatMoney(
-currency,
-amount
-);
+formatMoney(currency,amount);
 
-
-/* DISPLAY CURRENCY */
 
 document
 .getElementById("reviewCurrency")
@@ -2204,24 +2988,18 @@ document
 currency+" - "+currencies[currency].name;
 
 
-/* OPEN REVIEW SCREEN */
-
 showScreen("reviewTransfer");
 
 }
 
 
 /* ==========================================
-   CONFIRM AND SEND MONEY
+   CONFIRM AND SEND
 ========================================== */
 
 async function confirmAndSendMoney(){
 
 if(!selectedRecipient){
-
-alert(
-"Recipient information is missing."
-);
 
 showScreen("send");
 
@@ -2251,8 +3029,10 @@ document
 
 if(!Number.isFinite(amount)||amount<=0){
 
-alert(
-"Invalid transfer amount."
+showNotification(
+"Invalid amount",
+"Please enter a valid transfer amount.",
+"error"
 );
 
 showScreen("send");
@@ -2272,14 +3052,19 @@ button.disabled=true;
 
 const result=
 await apiRequest(
+
 "/api/transfers/send",
+
 {
 
 method:"POST",
 
 headers:{
+
 "Content-Type":"application/json",
+
 ...authHeaders()
+
 },
 
 body:JSON.stringify({
@@ -2294,43 +3079,45 @@ amount:amount
 })
 
 }
+
 );
 
 
-const response=result.response;
-const data=result.data;
+if(result.response.status===401){
+
+handleUnauthorized();
+
+return;
+
+}
 
 
-if(!response.ok){
+if(!result.response.ok){
 
 throw new Error(
-data.message||
+
+result.data.message||
 "Transfer failed."
+
 );
 
 }
 
 
-/* GET RECIPIENT NAME */
-
 const recipientName=
 
-data.transfer &&
-data.transfer.recipient &&
-data.transfer.recipient.name
+result.data.transfer &&
+result.data.transfer.recipient &&
+result.data.transfer.recipient.name
 
-?data.transfer.recipient.name
+?result.data.transfer.recipient.name
 
 :selectedRecipient.name;
 
 
-/* STORE DETAILS BEFORE CLEARING */
-
 const recipientTag=
 selectedRecipient.cashtag;
 
-
-/* CLEAR SEND FORM */
 
 document
 .getElementById("sendAmount")
@@ -2352,43 +3139,29 @@ document
 .innerHTML="";
 
 
-/* REFRESH NEXAPAY DATA */
-
-await loadWallets();
-
-await loadTransactions();
+await refreshDashboardData();
 
 await loadBackendUsers();
 
 
-/* CLEAR SELECTED RECIPIENT */
-
 selectedRecipient=null;
 
 
-/* SUCCESS MESSAGE */
+showNotification(
 
-alert(
+"Transfer successful 🎉",
 
-"🎉 Transfer Successful! 💪🔥\n\n"+
-
-formatMoney(
-currency,
-amount
-)+
-
-" was successfully sent to\n\n"+
-
+formatMoney(currency,amount)+
+" sent to "+
 recipientName+
+" ("+
+recipientTag+
+")",
 
-"\n"+
-
-recipientTag
+"success"
 
 );
 
-
-/* RETURN HOME */
 
 showScreen("home");
 
@@ -2402,12 +3175,10 @@ error
 );
 
 
-alert(
-
-"Transfer failed:\n\n"+
-
-error.message
-
+showNotification(
+"Transfer failed",
+error.message,
+"error"
 );
 
 }
@@ -2433,8 +3204,11 @@ function populateCurrencySelects(){
 const ids=[
 
 "sendCurrency",
+
 "fromCurrency",
+
 "toCurrency",
+
 "addCurrency"
 
 ];
@@ -2453,9 +3227,13 @@ Object.keys(currencies)
 .forEach(function(code){
 
 select.innerHTML+=
+
 '<option value="'+code+'">'+
+
 code+' - '+
+
 currencies[code].name+
+
 '</option>';
 
 });
@@ -2479,6 +3257,7 @@ function formatMoney(currency,amount){
 const value=
 Number(amount)||0;
 
+
 const info=
 currencies[currency];
 
@@ -2491,8 +3270,11 @@ return value.toLocaleString();
 
 
 return info.symbol+
+
 value.toLocaleString(
+
 undefined,
+
 {
 
 minimumFractionDigits:
@@ -2502,6 +3284,7 @@ maximumFractionDigits:
 currency==="BTC"?8:2
 
 }
+
 );
 
 }
@@ -2523,11 +3306,10 @@ const amount=
 Number(wallet[currency])||0;
 
 
-/* BITCOIN */
-
 if(currency==="BTC"){
 
 totalUSD+=
+
 amount*
 currencies.BTC.rate;
 
@@ -2535,8 +3317,6 @@ return;
 
 }
 
-
-/* OTHER CURRENCIES */
 
 const rate=
 Number(currencies[currency].rate)||0;
@@ -2555,16 +3335,51 @@ amount/rate;
 document
 .getElementById("totalBalance")
 .textContent=
+
 "$"+
+
 totalUSD.toLocaleString(
+
 undefined,
+
 {
 
 minimumFractionDigits:2,
+
 maximumFractionDigits:2
 
 }
+
 );
+
+}
+
+
+/* ==========================================
+   STATISTICS
+========================================== */
+
+function updateStatistics(){
+
+const activeWallets=
+Object.values(wallet)
+.filter(function(balance){
+
+return Number(balance)>0;
+
+}).length;
+
+
+document
+.getElementById("walletCount")
+.textContent=
+activeWallets;
+
+
+document
+.getElementById("transactionCount")
+.textContent=
+transactions.length;
 
 }
 
@@ -2590,26 +3405,37 @@ currencies[currency];
 
 
 container.innerHTML+=
+
 `
+
 <div class="wallet">
 
 <div>
 
 <div class="currency-name">
+
 ${info.symbol} ${info.name}
+
 </div>
+
 
 <div class="currency-code">
+
 ${currency}
+
 </div>
 
 </div>
+
 
 <div class="amount">
+
 ${formatMoney(currency,wallet[currency])}
+
 </div>
 
 </div>
+
 `;
 
 });
@@ -2625,8 +3451,10 @@ async function addDemoMoney(){
 
 if(!account||!token){
 
-alert(
-"Please log in again."
+showNotification(
+"Login required",
+"Please log in again.",
+"error"
 );
 
 return;
@@ -2641,10 +3469,12 @@ document
 .value
 );
 
+
 const currency=
 document
 .getElementById("addCurrency")
 .value;
+
 
 const button=
 document
@@ -2653,8 +3483,10 @@ document
 
 if(!Number.isFinite(amount)||amount<=0){
 
-alert(
-"Enter a valid amount."
+showNotification(
+"Invalid amount",
+"Enter a valid amount.",
+"error"
 );
 
 return;
@@ -2672,36 +3504,50 @@ button.disabled=true;
 
 const result=
 await apiRequest(
+
 "/api/wallets/add-money",
+
 {
 
 method:"POST",
 
 headers:{
+
 "Content-Type":"application/json",
+
 ...authHeaders()
+
 },
 
 body:JSON.stringify({
 
 currency:currency,
+
 amount:amount
 
 })
 
 }
+
 );
 
 
-const response=result.response;
-const data=result.data;
+if(result.response.status===401){
+
+handleUnauthorized();
+
+return;
+
+}
 
 
-if(!response.ok){
+if(!result.response.ok){
 
 throw new Error(
-data.message||
+
+result.data.message||
 "Could not add money."
+
 );
 
 }
@@ -2712,14 +3558,18 @@ document
 .value="";
 
 
-await loadWallets();
-
-await loadTransactions();
+await refreshDashboardData();
 
 
-alert(
+showNotification(
+
+"Demo money added",
+
 formatMoney(currency,amount)+
-" added successfully."
+" was added to your wallet.",
+
+"success"
+
 );
 
 
@@ -2731,9 +3581,10 @@ catch(error){
 
 console.error(error);
 
-alert(
-"Could not add money:\n\n"+
-error.message
+showNotification(
+"Could not add money",
+error.message,
+"error"
 );
 
 }
@@ -2761,10 +3612,12 @@ document
 .getElementById("fromCurrency")
 .value;
 
+
 const to=
 document
 .getElementById("toCurrency")
 .value;
+
 
 const amount=
 Number(
@@ -2781,8 +3634,10 @@ document
 
 if(!Number.isFinite(amount)||amount<=0){
 
-alert(
-"Enter a valid amount."
+showNotification(
+"Invalid amount",
+"Enter a valid amount.",
+"error"
 );
 
 return;
@@ -2792,8 +3647,10 @@ return;
 
 if(from===to){
 
-alert(
-"Choose different currencies."
+showNotification(
+"Choose different currencies",
+"Select two different currencies.",
+"error"
 );
 
 return;
@@ -2811,37 +3668,52 @@ button.disabled=true;
 
 const result=
 await apiRequest(
+
 "/api/wallets/convert",
+
 {
 
 method:"POST",
 
 headers:{
+
 "Content-Type":"application/json",
+
 ...authHeaders()
+
 },
 
 body:JSON.stringify({
 
 from:from,
+
 to:to,
+
 amount:amount
 
 })
 
 }
+
 );
 
 
-const response=result.response;
-const data=result.data;
+if(result.response.status===401){
+
+handleUnauthorized();
+
+return;
+
+}
 
 
-if(!response.ok){
+if(!result.response.ok){
 
 throw new Error(
-data.message||
+
+result.data.message||
 "Currency conversion failed."
+
 );
 
 }
@@ -2849,12 +3721,15 @@ data.message||
 
 const convertedAmount=
 
-data.conversion &&
+result.data.conversion &&
+
 Number.isFinite(
-Number(data.conversion.convertedAmount)
+
+Number(result.data.conversion.convertedAmount)
+
 )
 
-?Number(data.conversion.convertedAmount)
+?Number(result.data.conversion.convertedAmount)
 
 :0;
 
@@ -2864,17 +3739,18 @@ document
 .value="";
 
 
-await loadWallets();
-
-await loadTransactions();
+await refreshDashboardData();
 
 
-alert(
-"🎉 Currency converted successfully!\n\n"+
-formatMoney(
-to,
-convertedAmount
-)
+showNotification(
+
+"Conversion successful 🎉",
+
+formatMoney(to,convertedAmount)+
+" added to your "+to+" wallet.",
+
+"success"
+
 );
 
 
@@ -2889,9 +3765,11 @@ console.error(
 error
 );
 
-alert(
-"Conversion failed:\n\n"+
-error.message
+
+showNotification(
+"Conversion failed",
+error.message,
+"error"
 );
 
 }
@@ -2934,7 +3812,9 @@ document.getElementById("transactions");
 if(transactions.length===0){
 
 container.innerHTML=
+
 `
+
 <div class="empty">
 
 No transactions yet.
@@ -2944,6 +3824,7 @@ No transactions yet.
 Your NexaPay activity will appear here.
 
 </div>
+
 `;
 
 return;
@@ -2952,6 +3833,7 @@ return;
 
 
 container.innerHTML=
+
 transactions.map(function(tx){
 
 let sign="";
@@ -2961,18 +3843,18 @@ let className="";
 if(tx.type==="in"){
 
 sign="+";
+
 className="positive";
 
 }
 
-
 else if(tx.type==="out"){
 
 sign="-";
+
 className="negative";
 
 }
-
 
 else if(tx.type==="convert"){
 
@@ -2982,29 +3864,42 @@ className="positive";
 
 
 const date=
+
 tx.created_at
+
 ?new Date(tx.created_at).toLocaleString()
+
 :"";
 
 
 return `
+
 <div class="transaction">
 
 <div>
 
 <strong>
+
 ${tx.title||"Transaction"}
+
 </strong>
 
-<small>
-${tx.description||""}
-</small>
 
 <small>
+
+${tx.description||""}
+
+</small>
+
+
+<small>
+
 ${date}
+
 </small>
 
 </div>
+
 
 <div class="${className}">
 
@@ -3016,6 +3911,7 @@ tx.amount
 </div>
 
 </div>
+
 `;
 
 }).join("");
@@ -3044,12 +3940,23 @@ try{
 
 await navigator.clipboard.writeText(tag);
 
-}catch(error){}
-
-
-alert(
-tag+" copied!"
+showNotification(
+"Copied",
+tag+" copied to clipboard.",
+"success"
 );
+
+}
+
+catch(error){
+
+showNotification(
+"Your $Cashtag",
+tag,
+"info"
+);
+
+}
 
 }
 
@@ -3065,6 +3972,7 @@ clearSession();
 
 wallet={};
 
+
 Object.keys(currencies)
 .forEach(function(currency){
 
@@ -3074,15 +3982,19 @@ wallet[currency]=0;
 
 
 transactions=[];
+
 selectedRecipient=null;
+
 backendUsers=[];
 
 
 showScreen("login");
 
 
-alert(
-"You have logged out successfully."
+showNotification(
+"Logged out",
+"You have logged out successfully.",
+"success"
 );
 
 }
@@ -3096,6 +4008,7 @@ async function startNexaPay(){
 
 populateCurrencySelects();
 
+
 await connectNexaPayBackend();
 
 
@@ -3103,15 +4016,17 @@ if(account&&token){
 
 loadProfile();
 
+
 showScreen("home");
 
-await loadWallets();
 
-await loadTransactions();
+await refreshDashboardData();
 
 await loadBackendUsers();
 
-}else{
+}
+
+else{
 
 showScreen("signup");
 
@@ -3119,6 +4034,10 @@ showScreen("signup");
 
 }
 
+
+/* ==========================================
+   START APPLICATION
+========================================== */
 
 startNexaPay();
 
